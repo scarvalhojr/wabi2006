@@ -1,0 +1,19 @@
+SRC_DIR = .
+OUTPUT_DIR = .
+BASENAME = wabi2006
+MAINTEX = ${BASENAME}.tex
+INPUT = ${MAINTEX}
+DVI_FILE = ${OUTPUT_DIR}/${BASENAME}.dvi
+PDF_FILE = ${OUTPUT_DIR}/${BASENAME}.pdf
+
+.PHONY: ${PDF_FILE}
+
+dvi: ${DVI_FILE}
+
+pdf: ${PDF_FILE}
+
+${DVI_FILE}: ${OUTPUT_DIR}
+	latex ${INPUT}
+
+${PDF_FILE}: ${DVI_FILE}
+	dvipdfm -o $@ $^

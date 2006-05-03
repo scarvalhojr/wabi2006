@@ -1,0 +1,4 @@
+Submissions should consist of an extended abstract of no more than 12 pages when formatted using the Springer LNCS style. An abstract should start with a presentation of the biological problem, the results achieved, their significance and a comparison with previous work. This material should be understandable to non-specialists. A more technical exposition should follow and an optional short appendix may contain details or additional data to be consulted at the discretion of the program committee. The submission must include the corresponding author's email address. 
+
+Information for LNCS Authors:
+http://www.springer.com/east/home/computer/lncs?SGWID=5-164-7-72376-0#anchor1

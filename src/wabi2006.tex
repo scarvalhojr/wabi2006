@@ -262,8 +262,45 @@ from $s$.  $\mathcal{C}(s)$ can be interpreted as the fraction of
 faulty probes (because of unwanted illumination) produced at spot $s$.
 
 \begin{figure}
+\centerline{
 %%
-\footnotesize{ \centerline{
+\begin{picture}(160,120)
+\put(0,20){\makebox(160,100){
+\begin{minipage}{160pt}
+\centerline{\footnotesize{
+\begin{tabular}{c|c|c|c|c|c|c|c|} \cline{2-8}
+& \ 0.06 & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \cline{2-8}
+& \ 0.08 & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \cline{2-8}
+& \ 0.10 & \ 0.20 & \ 0.50 & \ 1.00 & \ 0.50 & \ 0.20 & \ 0.10 \\ \cline{2-8}
+& \ 0.11 & \ 0.25 & \ 1.00 & \  s   & \ 1.00 & \ 0.25 & \ 0.11 \\ \cline{2-8}
+& \ 0.10 & \ 0.20 & \ 0.50 & \ 1.00 & \ 0.50 & \ 0.20 & \ 0.10 \\ \cline{2-8}
+& \ 0.08 & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \cline{2-8}
+& \ 0.06 & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \cline{2-8}
+\end{tabular}}}
+\end{minipage}}}
+\end{picture}
+%%
+\begin{picture}(190,120)
+\footnotesize{
+\put(0,0){\makebox(190,120){
+  \input{position_weights}
+}}}
+\end{picture}
+%%
+}
+%\vspace*{-3ex}
+\caption{Ranges of values for both $\delta$ and $\omega$ on a typical Affymetrix
+chip where probes of length~$\ell = 25$ are synthesized in $\mu = 74$ masking
+steps. Left: approximate values of the distance-dependent weighting function
+$\delta(s,s',k)$ for a spot~$s$
+(shown in the center) and close neighbors $s'$, assuming that $s'$ is unmasked
+at step $k$. Right: position-dependent weights $\omega(s,k)$ at each value of
+$b_{s,k}$, assuming that spot $s$ is masked at step $k$.}
+\label{fig:conflictindex}
+\end{figure}
+
+\ignore{
+\footnotesize{
 \begin{tabular}{c|c|c|c|c|c|c|c|} \cline{2-8}
 & \ 0.06 & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \cline{2-8}
 & \ 0.08 & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \cline{2-8}
@@ -273,29 +310,8 @@ faulty probes (because of unwanted illumination) produced at spot $s$.
 & \ 0.08 & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \cline{2-8}
 & \ 0.06 & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \cline{2-8}
 \end{tabular}
-}}
-%%
-\footnotesize{\centerline{
-%%
-\begin{picture}(415,165)
-%% \put(0,123){a)}
-%% \put(0,41){b)}
-\put(15,0){\makebox(395,165){
-\input{position_weights}
-}}
-% \includegraphics*[0mm,0mm][128mm,65mm]{division}
-\end{picture}\vspace*{-3ex}
-%%
-}}
-%%
-\caption{Ranges of values for both $\delta$ and $\omega$ on a typical Affymetrix
-chip where probes of length~$\ell = 25$ are synthesized in $\mu = 74$ masking
-steps. Top: Distance-dependent weighting function $\delta(s,s',k)$ for a spot~$s$
-(shown in the center) and all close neighbors $s'$, assuming that $s'$ is unmasked
-at step $k$.  Bottom: Position-dependent weights $\omega(s,k)$ at each value of
-$b_{s,k}$, assuming that spot $s$ is masked at step $k$.}
-\label{fig:conflictindex}
-\end{figure}
+}
+}
 
 Finally, we note the following relation between conflict indices and border
 lengths. Define $\delta(s,s',k):=1$ if $s'$ is a direct neighbor of $s$ and is

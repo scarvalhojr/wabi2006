@@ -122,9 +122,9 @@ given rise to the term \emph{border conflict}.
 We are interested in finding an arrangement of the probes on the chip together
 with their embeddings in such a way that the chances of unintended
 illumination during mask exposure steps is minimized. This problem appears to
-be hard because of the exponential number of possible arrangements
-(although we are not aware of an NP-hardness proof).
-In a separate work~\cite{CARVALHO06}, we have presented a formulation based on
+be hard because of the exponential number of possible arrangements,
+although we are not aware of an NP-hardness proof.
+In a separate work~\cite{CARVALHO06}, we presented a formulation based on
 the quadratic assignment problem (QAP), a classical combinatorial optimization
 problem that is known to be NP-hard and NP-hard to approximate. Our formulation
 gives further indication that the problem is hard.
@@ -343,7 +343,7 @@ Hannenhalli~{\it et~al}.\ \cite{HANNENHALLI02} were the first to consider the bo
 length problem on large
 oligonucleotide arrays of arbitrary probes. They reported that the first Affymetrix
 chips were designed using a heuristic for the traveling salesman problem (TSP). The
-idea consists of building a weighted graph with nodes representing probes and edges
+idea consists of building a weighted graph with nodes representing probes, and edges
 containing the Hamming distance between the probe sequences. A TSP tour is approximated,
 resulting in consecutive probes in the tour being likely to be similar. The TSP
 tour is then \emph{threaded} on the array in a row-by-row fashion.
@@ -374,7 +374,7 @@ Kahng~{\it et~al}.~\cite{KAHNG02} propose the \emph{Epitaxial} placement algorit
 places a random probe in the center of the array and continues to
 insert probes in spots adjacent to already filled spots. Priority is given
 to spots with the largests numbers of filled neighbors. At each iteraction,
-all non-filled spots~$s_i$ and finds a non-assigned probe
+it examines all non-filled spots~$s_i$ and finds a non-assigned probe
 $p_j$ with minimum sum of Hamming distances to the neighboring probes
 $H_{ij}$, employing a greedy heuristic to select the next spot to be filled.
 With this algorithm, they claimed to
@@ -410,8 +410,7 @@ differences: spots are filled in a pre-defined order, namely
 from top to bottom, left to right, and only probes of a limited list of candidates are
 considered when filling each spot. Their experiments showed
 that the Row-epitaxial is the best large-scale placement algorithm,
-achieving up to 9\% reduction in border length when compared to the
-TSP-based approach of Hannenhalli~{\it et~al}.\ \cite{HANNENHALLI02}.
+achieving up to 9\% reduction in border length over the TSP+1-threading.
 
 \ignore{
 The ever growing number of probes on the latest microarrays and the properties of
@@ -426,11 +425,11 @@ sub-regions of the chip. Each sub-region can then be treated as an independent c
 or recursively partitioned. These smaller sub-problems, when solved, immediately
 constitute a final solution. In this way, algorithms with non-linear time or space
 complexities can be used to compute the layout of larger chips that otherwise would not
-be feasible. A partitioning is clearly a compromise in solution quality. However,
-because of the large number of probes, this compromise can be small.
+be feasible. A partitioning is clearly a compromise in solution quality, but
+for a large number of probes it can be minor.
 
-The only partitioning algorithm available in the literature is the Centroid-based
-Quadrisection \cite{KAHNG03B}. It starts by randomly selecting a probe
+The only known partitioning algorithm is the Centroid-based
+Quadrisection~\cite{KAHNG03B}. It starts by randomly selecting a probe
 $c_1 \in \mathcal{P}$. Then, it selects another probe $c_2$ maximizing
 $h(c_1,c_2)$, the Hamming distance between their embeddings. Similarly, it selects
 $c_3$ and $c_4$ maximizing the sum of Hamming distance between these four probes,
@@ -439,9 +438,9 @@ $p_i \in \mathcal{P}$ are then compared to the centroids and assigned to the sub
 $\mathcal{P}_j$ associated with $c_j$ with minimum $h(p_i,c_j)$. The chip is divided
 into four quadrants, each being assigned to a sub-set $\mathcal{P}_j$ .
 The procedure is repeated
-recursively on each sub-region until a given recursion depth is reached. In the end,
+recursively on each quadrant until a given recursion depth is reached. In the end,
 the Row-epitaxial algorithm is used to produce the placement of the probes in each
-sub-region.
+final sub-region.
 
 \paragraph{Post-placement Optimization.}
 Once the placement is done, further reduction of conflicts can be
@@ -454,7 +453,7 @@ Originally, it was developed for border length minimization, but
 in Sect.\,\ref{sec:ospe}, we show how it can also be used for minimizing the
 sum of conflict indices in the region around $s$.
 
-The OSPE algorithm is the basic operation of several post-placement optimizations
+The OSPE algorithm is the basic operation of several post-placement optimization
 algorithms proposed by Kahng~{\it et~al}.: Batched Greedy~\cite{KAHNG02},
 Chessboard~\cite{KAHNG02} and Sequential~\cite{KAHNG03B}. Their main difference lies in
 the order in which the re-embeddings take place.
@@ -481,7 +480,7 @@ re-embedding all probes with the OSPE algorithm. Surprisingly, it achieves the g
 reduction of border conflicts with a running time compared to the Batched Greedy,
 the faster among the three.
 
-The OSPE algorithm can never increase the amount of conflicts of a region.
+The OSPE algorithm can never increase the amount of conflicts in a region.
 All optimization algorithms can thus be executed several times until
 a local optimal solution is found, or until the improvements drop below a given threshold.
 
@@ -532,13 +531,12 @@ Probes with more embeddings can better
 to have an embedding with fewer conflicts than a probe that has
 only a limited number of embeddings.
 
-We use the probes with fewer embeddings, which we call ``pivots'', to drive the
+We use the probes with fewer embeddings, that we call ``pivots'', to drive the
 partitioning of the probe set and to re-embed the the probes just before their
 placement (as a partitioning algorithm, the PP also works in combination with
 another placement algorithm).
-
-Perhaps more signficantly, we have designed our algorithm to seek the minimization
-of border length or conflict indices.
+We have also designed our algorithm to work both as a border length minimization
+and as a conflict index minimization.
 
 \begin{algorithm}
 \caption{Pivot Partitioning}
@@ -577,11 +575,12 @@ as pivot candidates:
 The first step of the Pivot Partitioning (Algorithm\,\ref{alg:pivotpart}), is to
 select the pivot candidates $\mathcal{Q}$, a set of probes that can later be
 chosen as pivots. Our pivots are the equivalent of the centroids of the CQ
-algorithm; they are also used to partition the set of probes $\mathcal{P}$. Their
+algorithm; they are used to partition the probe set. Their
 selection, however, is restricted to the probes having the least number of
-embeddings. The reasons are two-fold. First, less time is spent choosing the pivots
-since less candidates need to be examined.
+embeddings.
 
+The reasons are two-fold. First, less time is spent choosing the pivots
+since less candidates need to be examined.
 Second, probes with less number of embeddings are better representatives to drive
 the partitioning. The problem is that some embeddings have their unmasked steps
 concentrated in one region of the deposition sequence. This is specially true if
@@ -591,18 +590,17 @@ left-most embeddeding, can be synthesized in the first 37 masking steps, thus
 using only half of the total 74 steps. Such probes are clearly not good choices
 for pivots. Probes with the minimum number of embeddings, on the other hand,
 are guaranteed to cover most (if not all) cycles of the deposition sequence,
-and are thus a better choice for pivots.
+and are thus a better choices for pivots.
 
 In order to guarantee a good partitioning, $\mathcal{Q}$ must have a reasonable
 amount of probes. This is because the pivots later chosen for the partitioning
 must maximize the distance between their embeddings, just like in the CQ
 algorithm. We thus limit the size of $\mathcal{Q}$ to a minimum of 1\% of the total
 number of probes\footnote{Usually, around 1-2\% of the probes of an Affymetrix array
-have only one possible embedding, or two if we consider that they appear in PM/MM
+have only one possible embedding; or two, if we consider that they appear in PM/MM
 pairs and must be ``aligned'' in all but the steps that synthesize their middle
-bases}, which sometimes forces the selection of the probes with the next minimum
+bases}, which may force the selection of probes with the next minimum
 number of embeddings.
-
 Computing the number of embeddings of a probe takes $O(\ell \mu)$ time, where
 $\ell$ is the length of the probe and $\mu$ is the length of the deposition sequence.
 With a few simple optimizations, however, even a million probes can be examined in
@@ -650,7 +648,7 @@ pivots:
 \end{algorithm}
 
 The essence of the Pivot Partitioning algorithm is its recursive procedure
-(Algorithm\,\ref{alg:recursivepart}), that is executed until a specified maximum
+(Algorithm\,\ref{alg:recursivepart}), that is executed until a given maximum
 recursion depth $t_{max}$ is reached. Its main arguments are the set of probes
 $\mathcal{P}$, the set of pivot candidates $\mathcal{Q}$ and a rectangular region
 of the chip $R$, which consists of a range of rows and columns.
@@ -661,41 +659,40 @@ their embeddings $wd(q', q'')$ is maximized. The weighted distance equals the
 Hamming distance in case of border length minimization. In case of conflict index
 minimization, the weigthed distance mimics the position-dependent weights $\omega$
 defined in Sect.\,\ref{sec:conflict_index}. The embeddings of the pivots are
-considered fixed; thus computing $wh(q', q'')$ takes linear time on the length
+considered fixed; thus, computing $wh(q', q'')$ takes linear time on the length
 of their embeddings.
 
 The two pivots $q'$ and $q''$ are then used to divide the set $\mathcal{Q}$
 by computing the weighted distance between the embeddings of $q_i \in \mathcal{Q}$
 and the embeddings of the chosen pivots, assigning $q_i$ to $\mathcal{Q}'$ if
 $wd(q_i, q') < wd(q_i, q'')$ or to $\mathcal{Q}''$ if $wd(q_i, q'') < wd(q_i, q')$.
-In case of draws, the assignment is made to the sub-set with less elements in order
+In case of draws, the assignments are made in an attempt to
 achieve balanced partitionings. Again, the distances are computed in linear time
 since embeddings of pivot candidates are also considered fixed.
 
-The next step is similar to the previous one, but we now partition the set of probes
-$\mathcal{P}$. Moreover, when we examine each probe $p_i \in \mathcal{P}$, we
-compute the minimum weighted distance that any embedding of of $p_i$ can have to the
-embeddings of the pivots $q'$ and $q''$, assigning $p_i$ to the sub-set $\mathcal{P}'$
-or $\mathcal{P}''$ associated with the pivot with the minimum distance. This is done
-with the OSPE algorithm described in Sect.\,\ref{sec:ospe}. In fact, a special version
-is used since there is no information, at this moment, of the locations of the probes
-or pivots.
+In the next step, the set $\mathcal{P}$ of probes is partitioned. For all probes
+$p_i \in \mathcal{P}$, we compute the minimum weighted distance that any embedding
+of $p_i$ can have to the embeddings of the pivots $q'$ and $q''$, assigning it to
+one of the sub-set $\mathcal{P}'$ and $\mathcal{P}''$ associated with the pivot
+with the minimum distance. This is done with a special version of the OSPE algorithm
+that ignores the location of the probes.
 
 After the partitioning of $\mathcal{P}$ and $\mathcal{Q}$, we can then divide the
 region $R$ of the chip into two sub-regions $R'$ and $R''$, proportionally to the
 number of probes in $\mathcal{Q}' \cup \mathcal{P}'$ and $\mathcal{Q}'' \cup \mathcal{P}''$.
-The current partitioning depth determines if a horizontal or vertical partitioning is
-performed. Since we only deal with rectangular regions, it may be necessary to move
-a few probes from one partition to the other.
+We alternate between horizontal and vertical divisions at each partitioning depth $t$.
+Since we only deal with rectangular regions, sometimes it is necessary to move
+a few probes from one partition to the other in order to ensure that the probes
+will fit in the sub-regions.
 
 Each sub-region is then processed recursively. Once the maximum partitioning depth
-$t_max$ is reached the maximum, the Row-epitaxial~\cite{KAHNG03A} algorithm is
+$t_{max}$ is reached, the Row-epitaxial~\cite{KAHNG03A} algorithm is
 called to place the probes of $\mathcal{P} \cup \mathcal{Q}$ in the region $R$.
-Before that, however, all probes of $p_i \in \mathcal{P}$ are re-embedded optimally
+Before that, however, all probes $p_i \in \mathcal{P}$ are re-embedded optimally
 in regards to the pivots using a special version of the OSPE algorithm that treats
 all pivots as immediate neighbors of $p_i$. This is done before the placement in
-order to ``synchronize'' any skewed embeddings. Also, it finds an embedding of
-$p_i$ that has minimum conflict with the ``average'' probe assigned to $R$.
+order to ``synchronize'' any skewed embeddings, and to finds an embedding of
+$p_i$ that has minimum conflict with the ``average'' probe in $R$.
 
 % ==============================================================================
 \section{Results}

@@ -206,7 +206,7 @@ accounts for observation a) above:
         \right.
 \end{equation}
 %%
-where $d(s,s')$ is the Euclidian distance between spots~$s$ and~$s'$.
+where $d(s,s')$ is the Euclidean distance between spots~$s$ and~$s'$.
 This form of weighting function is the same as suggested in
 \cite{KAHNG03A}.  Note that $\delta$ is a ``closeness'' measure
 between $s$ and $s'$ only if $s'$ is
@@ -489,14 +489,55 @@ a local optimal solution is found, or until the improvements drop below a given 
 % ==============================================================================
 \label{sec:ospe}
 
-TODO: describe the OSPE algorithm as in the original paper.
+The Optimum Single Probe Embedding~\cite{KAHNG02} is a dynamic programming
+algorithm that computes the optimum embedding of a probe $p$ on a spot $s$
+in regards to its neighboring probes whose embeddings are fixed. We first present
+a general formulation for conflict index minimization; later we show the
+formulation for border length minimization as a special case.
 
-% ------------------------------------------------------------------------------
-\subsection{OSPE for Conflict Index Minimization}
-\label{sec:ospe_ci}
+The OSPE can be seen as a special case of a global alignment between the
+sequence $p$ of length $\ell$ and the deposition sequence $\mathcal{S}$ of length
+$\mu$. We use an $(\ell + 1) \times (\mu + 1)$ array $D$ where the entry $D[i,j]$
+contains the minimum cost of an embedding of $p[1..i]$ into $\mathcal{S}[1..j]$.
+The cost is the sum of conflicts induced by the embedding of $p$ on its neighbors
+plus the conflicts suffered by $p$ because of the embeddings of its neighbors.
 
-TODO: define the cost functions to achieve conflict index minimization.
+At every step of the deposition sequence, the spot $s$ can be either masked or
+unmasked. Thus, entry $D[i,j]$ is computed as the minimum between the costs
+resulting from each possible action:
+%%
+\begin{equation}
+D[i,j] = \min (D[i-1,j] + M_{ij}, D[i-1,j-1] + U_{j}),
+\end{equation}
+%%
+where $M_{ij}$ is the cost of masking spot $s$ at step $j$ given that base $i$ of
+probe $p$ has already been synthesized, and $U_{j}$ is the cost of unmasking spot
+$s$ at step $j$.
 
+If the spot $s$ is masked at a step $j$, any neighbor that is unmasked generates
+a conflict on $p$ because it creates the potential of illumination at $s$. The
+cost of such action is then set as follows:
+%%
+\begin{equation}
+M_{ij} := c \cdot \exp{\left(\theta \cdot \lambda(s,k)\right)}
+\end{equation}
+%%
+where $c$ and $\theta$ are constants, and $\lambda(s,k)$ is as defined
+in~(\ref{eq:base_pos}).
+
+Similarly, if the spot $s$ is unmasked at a step $j$, it may generate a conflict
+on any neighbor $s'$ that is masked, and the cost of this action is set as follows:
+%%
+\begin{equation}
+U_{j} := \sum_{s'} \omega(s',j) \cdot (d(s',s))^{-2},
+\end{equation}
+%%
+where $d(s',s)$ is the Euclidean distance between spots~$s'$ and~$s$, and
+$\omega(s',j)$ is as defined in~(\ref{eq:pos_mult}).
+
+\paragraph{Border length minimization.} To do.
+
+\paragraph{Remarks.}
 The time complexity of the OSPE algorithm is $O(\ell_p \cdot |\mathcal{S}|)$,
 where $\ell_p$ is the length of probe $p$ and $|\mathcal{S}|$ is the length of
 the deposition sequence~\cite{KAHNG02}.

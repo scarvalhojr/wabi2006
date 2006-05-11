@@ -268,17 +268,17 @@ faulty probes (because of unwanted illumination) produced at spot $s$.
 \centerline{
 %%
 \begin{picture}(160,105)
-\put(0,25){\makebox(160,80){
+\put(0,23){\makebox(160,80){
 \begin{minipage}{160pt}
 \centerline{\footnotesize{
-\begin{tabular}{c|c|c|c|c|c|c|c|} \cline{2-8}
-& \ 0.06 & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \cline{2-8}
-& \ 0.08 & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \cline{2-8}
-& \ 0.10 & \ 0.20 & \ 0.50 & \ 1.00 & \ 0.50 & \ 0.20 & \ 0.10 \\ \cline{2-8}
-& \ 0.11 & \ 0.25 & \ 1.00 & \  s   & \ 1.00 & \ 0.25 & \ 0.11 \\ \cline{2-8}
-& \ 0.10 & \ 0.20 & \ 0.50 & \ 1.00 & \ 0.50 & \ 0.20 & \ 0.10 \\ \cline{2-8}
-& \ 0.08 & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \cline{2-8}
-& \ 0.06 & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \cline{2-8}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
+\ 0.06\ & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \hline
+\ 0.08\ & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \hline
+\ 0.10\ & \ 0.20 & \ 0.50 & \ 1.00 & \ 0.50 & \ 0.20 & \ 0.10 \\ \hline
+\ 0.11\ & \ 0.25 & \ 1.00 &    s   & \ 1.00 & \ 0.25 & \ 0.11 \\ \hline
+\ 0.10\ & \ 0.20 & \ 0.50 & \ 1.00 & \ 0.50 & \ 0.20 & \ 0.10 \\ \hline
+\ 0.08\ & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \hline
+\ 0.06\ & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \hline
 \end{tabular}}}
 \end{minipage}}}
 \end{picture}
@@ -301,20 +301,6 @@ at step $k$. Right: position-dependent weights $\omega(s,k)$ at each value of
 $b_{s,k}$, assuming that spot $s$ is masked at step $k$.}
 \label{fig:conflictindex}
 \end{figure}
-
-\ignore{
-\footnotesize{
-\begin{tabular}{c|c|c|c|c|c|c|c|} \cline{2-8}
-& \ 0.06 & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \cline{2-8}
-& \ 0.08 & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \cline{2-8}
-& \ 0.10 & \ 0.20 & \ 0.50 & \ 1.00 & \ 0.50 & \ 0.20 & \ 0.10 \\ \cline{2-8}
-& \ 0.11 & \ 0.25 & \ 1.00 & \  s   & \ 1.00 & \ 0.25 & \ 0.11 \\ \cline{2-8}
-& \ 0.10 & \ 0.20 & \ 0.50 & \ 1.00 & \ 0.50 & \ 0.20 & \ 0.10 \\ \cline{2-8}
-& \ 0.08 & \ 0.13 & \ 0.20 & \ 0.25 & \ 0.20 & \ 0.13 & \ 0.08 \\ \cline{2-8}
-& \ 0.06 & \ 0.08 & \ 0.10 & \ 0.11 & \ 0.10 & \ 0.08 & \ 0.06 \\ \cline{2-8}
-\end{tabular}
-}
-}
 
 Finally, we note the following relation between conflict indices and border
 lengths. Define $\delta(s,s',k):=1$ if $s'$ is a direct neighbor of $s$ and is
@@ -739,6 +725,57 @@ $p_i$ that has minimum conflict with the ``average'' probe in $R$.
 \section{Results}
 % ==============================================================================
 \label{sec:results}
+
+\begin{table}
+\label{tab:pp_x_cq_bl}
+\caption{Improvements of Pivot Partitioning (PP) over Centroid-based Quadrisection (CQ) with
+varying partitioning depths. Border length comparison. After running Sequential
+optimization. Chips with random probes, synchronously embedded.}
+\centerline{\scriptsize{
+\begin{tabular}{clrrlrrlrrlrr}
+& & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} \\
+\noalign{\smallskip}
+Dim & & \multicolumn{1}{c}{$L=0$} & \multicolumn{1}{c}{$t_{max}=0$} & & \multicolumn{1}{c}{$L=1$} & \multicolumn{1}{c}{$t_{max}=2$} & & \multicolumn{1}{c}{$L=2$} & \multicolumn{1}{c}{$t_{max}=4$} & & \multicolumn{1}{c}{$L=3$} & \multicolumn{1}{c}{$t_{max}=6$} \\
+\noalign{\smallskip}
+\cline{1-1} \cline{3-4} \cline{6-7} \cline{9-10} \cline{12-13}
+\noalign{\smallskip}
+$100$ & & \   415,227 & \ -3.00\% & & \   393,218 & \ 0.16\% & & \   399,312 & \ -1.98\% & & \   410,608 & \ -2.87\% \\
+$200$ & & \ 1,608,382 & \         & & \ 1,524,803 & \        & & \ 1,545,825 & \         & & \ 1,573,096 & \         \\
+$300$ & & \ 3,529,745 & \         & & \ 3,493,552 & \        & & \ 3,413,316 & \         & & \ 3,434,964 & \         \\
+$500$ & & \ 9,463,941 & \         & & \ 9,546,351 & \ 7.87\% & & \ 9,355,231 & \  4.67\% & & \ 9,307,510 & \  1.03\% \\
+\noalign{\smallskip}
+\hline
+\end{tabular}}}
+\end{table}
+
+\begin{table}
+\label{tab:pp_x_cq_time}
+\caption{Reduction in running time of both Pivot Partitioning (PP) and Centroid-based Quadrisection (CQ) with
+varying partitioning depths. Running time comparison of partitioning and placement only
+(no post-placement optimization).}
+\centerline{\scriptsize{
+\begin{tabular}{clrrlrrlrrlrr}
+& & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} \\
+\noalign{\smallskip}
+Dim & & \multicolumn{1}{c}{$L=0$} & \multicolumn{1}{c}{$t_{max}=0$} & & \multicolumn{1}{c}{$L=1$} & \multicolumn{1}{c}{$t_{max}=2$} & & \multicolumn{1}{c}{$L=2$} & \multicolumn{1}{c}{$t_{max}=4$} & & \multicolumn{1}{c}{$L=3$} & \multicolumn{1}{c}{$t_{max}=6$} \\
+\noalign{\smallskip}
+\cline{1-1} \cline{3-4} \cline{6-7} \cline{9-10} \cline{12-13}
+\noalign{\smallskip}
+$100$ & & \    108 & \   000 & & \ 36.1\% & \   000 & & \   399,312 & \   000 & & \   410,608 & \   000 \\
+$200$ & & \  1,151 & \ 0,000 & & \    992 & \ 0,000 & & \ 1,545,825 & \ 0,000 & & \ 1,573,096 & \ 0,000 \\
+$300$ & & \  3,671 & \ 0,000 & & \  3,529 & \ 0,000 & & \ 3,413,316 & \ 0,000 & & \ 3,434,964 & \ 0,000 \\
+$500$ & & \ 10,630 & \ 0,000 & & \ 10,591 & \ 0,000 & & \ 9,355,231 & \ 0,000 & & \ 9,307,510 & \ 0,000  \\
+\noalign{\smallskip}
+\hline
+\multicolumn{13}{c}{TODO: substitute time in seconds for a percentage of the time with no partitioning.}
+\end{tabular}}}
+\end{table}
+
+
+\ignore{
+Experiments were conducted on a Sun Fire V1280 server with 900Mhz UltraSparc III+ processors
+and 96 Gb of RAM under similar load balances.
+}
 
 \ignore{Their results show that the running time of the Row-epitaxial algorithm
 drops significantly with increasing recursion depth. The time required to place

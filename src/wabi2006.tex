@@ -16,13 +16,13 @@
 % abbreviated title (for running head) also used for the TOC unless \toctitle is used
 \titlerunning{Designing Oligonucleotide Microarrays}
 %
-\author{Sergio A. de Carvalho Jr.\inst{1,}\inst{2}\inst{,3} \and Sven Rahmann\inst{1,}\inst{3}}
+\author{S\'ergio A. de Carvalho Jr.\inst{1,}\inst{2}\inst{,3} \and Sven Rahmann\inst{1,}\inst{3}}
 %
 % abbreviated author list (for running head)
-\authorrunning{de Carvalho Jr. and Rahmann}
+\authorrunning{S.~A.~de Carvalho Jr.~and S.~Rahmann}
 %
 %%%% modified list of authors for the TOC (add the affiliations)
-\tocauthor{Sergio A. de Carvalho Jr. (Universit\"{a}t Bielefeld),
+\tocauthor{Sergio A.~de Carvalho Jr.\ (Universit\"{a}t Bielefeld),
 Sven Rahmann (Universit\"{a}t Bielefeld)}
 %
 \institute{
@@ -51,6 +51,7 @@ ever shrinking feature sizes, the arrangement of the probes on the
 chip and the order in which their nucleotides are synthesized play an
 important role on the quality of the final product. We propose a new
 model called \emph{conflict index} for evaluating microarray layouts.
+%TODO
 \end{abstract}
 
 % ==============================================================================
@@ -82,7 +83,7 @@ In general, a probe can be \emph{embedded} within $\mathcal{S}$ in several
 ways. An embedding of $p_{i}$ is a $\mu$-tuple
 $\varepsilon_{i} = (e_{i,1}, e_{i,2}, ... e_{i,\mu})$ in which $e_{i,k} = 1$
 if probe $p_{i}$ receives nucleotide $t_{k}$ (at step~$k$), or 0 otherwise
-(Fig.\,\ref{fig:masking_process}). In particular, a \emph{left-most embedding}
+(Fig.~\ref{fig:masking_process}). In particular, a \emph{left-most embedding}
 is an embedding in which the bases are synthesized as soon as possible.
 
 \begin{figure}
@@ -93,17 +94,17 @@ sequence and the probe embeddings. On the bottom, the first four resulting masks
 \label{fig:masking_process}
 \end{figure}
 
-Deposition sequences are usually cyclical, that is $\mathcal{S}$, is a repeated
+The deposition sequence $\mathcal{S}$ often is a repeated
 permutation of the alphabet. \ignore{This is mainly because such sequences maximize the
-number of possible subsequences \cite{CHASE76}}. In this context, we can
+number of possible subsequences \cite{CHASE76}}. Then we can
 distinguish between \emph{synchronous} and \emph{asynchronous} embeddings. In
-the first case, each probe has one and only one nucleotide synthesized in every
-cycle of the deposition sequence; hence, 100 masking steps are needed to
-synchronously synthesize probes of length 25.
+the first case, each probe has exactly one nucleotide synthesized in every
+cycle of the deposition sequence; hence, 25 cycles or 100 steps are needed to
+synthesize probes of length 25.
 In the case of asynchronous
 embeddings, probes can have any number of nucleotides synthesized in any given
 cycle. This allows for shorter deposition sequences. All Affymetrix chips that
-we know of can be asynchronously synthesized in 74 masking steps.
+we know of can be asynchronously synthesized in 74 steps (18.5 cycles)
 
 % removed footnote
 \ignore{We
@@ -113,8 +114,8 @@ selection procedure is restricted to sequences that fit into this deposition
 sequence.}
 
 Because of diffraction of light or internal reflection, untargeted spots can
-sometimes be accidentally activated in a certain masking step, producing
-unpredicted probes that can compromise the results of an experiment. This problem
+be accidentally activated in a certain masking step, producing
+unpredicted probes that can compromise experimental results. This problem
 is more likely to occur near the borders between masked and unmasked
 spots~\cite{FODOR91}. This observation has
 given rise to the term \emph{border conflict}.
@@ -130,11 +131,10 @@ problem that is known to be NP-hard and NP-hard to approximate. Our formulation
 gives further indication that the problem is hard.
 
 Optimal solutions are thus
-unlikely to be found even for very small chips, and even if we consider the probes
-as having a single pre-defined embedding.
-If we consider all possible embeddings, the problem is even
-harder. Affymetrix probes, for instance, can have up to several million different
-embeddings. For this reason, the problem has been traditionally tackled in two
+unlikely to be found even for small chips and even if we assume that all probes
+have a single predefined embedding.
+If we consider all possible embeddings (typically several million embeddings exist for a typical probe on Affymetrix arrays), the problem is even
+harder. For this reason, the problem has been traditionally tackled in two
 phases. First, an initial embedding of the probes is fixed and an arrangement of
 these embeddings on the chip with minimum border conflicts is sought. This is
 usually referred to as the \emph{placement}. Second, a \emph{post-placement}
@@ -149,7 +149,7 @@ a new algorithm... % TODO continue...
 
 In the next section, we review the Border Length Minimization Problem
 \cite{HANNENHALLI02}, and define an extended model for evaluating microarray
-layouts. In Sect.\,\ref{sec:previous_work}, we briefly review existing
+layouts. In Sect.~\ref{sec:previous_work}, we briefly review existing
 placement strategies. % TODO finish this paragraph
 
 
@@ -164,7 +164,7 @@ of unintended illumination in the production of microarrays. They formulated the
 an arrangement of the probes together with their embeddings in such a way that the number
 of border conflicts during mask exposure steps is minimal.
 
-The \emph{border length}~$\mathcal{B}_k$ of a mask~$m_{k}$ is simply
+The \emph{border length}~$\mathcal{B}_k$ of a mask~$m_{k}$ is
 defined as the number of borders shared by masked and unmasked spots
 at masking step~$k$. The total border length of a given arrangement is
 the sum of border lengths over all masks. For example, the four masks

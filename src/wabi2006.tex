@@ -412,7 +412,7 @@ or recursively partitioned. These smaller sub-problems, when solved, immediately
 constitute a final solution. In this way, algorithms with non-linear time or space
 complexities can be used to compute the layout of larger chips that otherwise would not
 be feasible. A partitioning is clearly a compromise in solution quality, but
-for a large number of probes it can be minor.
+for large chips it can have little impact.
 
 The only known partitioning algorithm is the Centroid-based
 Quadrisection~\cite{KAHNG03B}. It starts by randomly selecting a probe
@@ -433,7 +433,7 @@ Once the placement is done, further reduction of conflicts can be
 achieved by re-embedding the probes without changing their locations.
 Kahng~{\it et~al}.~\cite{KAHNG02} presented an efficient dynamic programming
 algorithm, that we call Optimum Single Probe Embedding (OSPE), for computing an
-optimum embedding of a probe on a spot $s$ in regards to the probes of
+optimum embedding of a probe on a spot $s$ with respect to the probes of
 neighboring spots, whose embeddings are considered fixed.
 Originally, it was developed for border length minimization, but
 in Sect.\,\ref{sec:ospe}, we show how it can also be used for minimizing the
@@ -448,7 +448,7 @@ the order in which the re-embeddings take place.
 The first algorithm is a simple greedy approach that computes, for each spot of the chip,
 the maximum reduction of conflicts that could be achieved by re-embedding its probe with
 the OSPE algorithm. It then greedily selects the spot with higher gain and re-embeds
-its probe optimally in regards to its neighbors, updating the gains of affected
+its probe optimally with respect to its neighbors, updating the gains of affected
 spots. A faster version, called Batched Greedy, sacrifices its greedy nature by postponing
 the update of gains and re-embedding all probes that have not been affected by the
 re-embeddings performed in the current iteration.
@@ -477,7 +477,7 @@ a local optimal solution is found, or until the improvements drop below a given 
 
 The Optimum Single Probe Embedding~\cite{KAHNG02} is a dynamic programming
 algorithm that computes the optimum embedding of a probe $p$ on a spot $s$
-in regards to its neighboring probes whose embeddings are fixed. We first present
+with respect to its neighboring probes whose embeddings are fixed. We first present
 a general formulation for conflict index minimization; later we show the
 formulation for border length minimization as a special case.
 
@@ -538,7 +538,7 @@ decribed here.
 % ==============================================================================
 \label{sec:pivotpart}
 
-Traditionally, the microarray design problem has been tackled in two phases. First,
+Traditionally, the microarray layout problem has been tackled in two phases. First,
 an initial embedding of the probes is fixed and an arrangement of these sequences
 on the chip is produced by a placement algorithm. Then, a post-placement optimization
 phase re-embeds the probes using the OSPE algorithm to achive further reduction in
@@ -561,9 +561,8 @@ only a limited number of embeddings.
 We use the probes with fewer embeddings, that we call ``pivots'', to drive the
 partitioning of the probe set and to re-embed the the probes just before their
 placement (as a partitioning algorithm, the PP also works in combination with
-another placement algorithm).
-We have also designed our algorithm to work both as a border length minimization
-and as a conflict index minimization.
+another placement algorithm). Our algorithm works for border length minimization
+as well as conflict index minimization.
 
 \begin{algorithm}
 \caption{Pivot Partitioning}
@@ -579,14 +578,14 @@ Output: \> placement of the probes $p_i$ on the chip
 \end{tabbing}
 
 \begin{enumerate}
-\item Select probes $p_i$ with the minimum number of embeddings, $noe(p_i)$,
+\item Select probes $p$ with minimum number of embeddings, $E(p)$,
 as pivot candidates:
   \begin{enumerate}
-  \item Let $\mathcal{Q} = \{p_i \in \mathcal{P} | noe(p_i) = \min noe(p_j) \forall p_j \in \mathcal{P} \}$
-  \item Set $P \leftarrow P - Q$
+  \item Let $\mathcal{Q} = \{p \in \mathcal{P} | E(p) = \min E(p_i) \forall p_i \in \mathcal{P} \}$
+  \item Set $\mathcal{P} \leftarrow \mathcal{P} - Q$
   \end{enumerate}
 \item Define a region $R$ of the chip containing all of its rows and columns
-\item Call the Recursive Partitioning with the initial partitioning depth $t$ set to 1:
+\item Call the Recursive Partitioning with the initial partitioning depth $t$:
   \begin{enumerate}
   \item Set $t \leftarrow 1$
   \item Call Recursive Partitioning ($t$, $t_{max}$, $R$, $\mathcal{Q}$, $\mathcal{P}$)
@@ -608,7 +607,7 @@ embeddings.
 
 The reasons are two-fold. First, less time is spent choosing the pivots
 since less candidates need to be examined.
-Second, probes with less number of embeddings are better representatives to drive
+Second, probes with fewer embeddings are better representatives to drive
 the partitioning. The problem is that some embeddings have their unmasked steps
 concentrated in one region of the deposition sequence. This is specially true if
 the probes are embedded in a left-most fashion (such as $\varepsilon_8$ in
@@ -643,7 +642,7 @@ a few minutes.
 
 \begin{tabbing}
 Output: \=									\kill
-Input:  \> current depth level $t$, and						\\
+Input:  \> current depth level $t$,						\\
         \> maximum depth level $t_{max}$					\\
         \> rectangular region $R$ of the chip,					\\
         \> set of pivot candidates $\mathcal{Q}$,				\\
@@ -653,16 +652,11 @@ Output: \> placement of the probes $p_i \in \mathcal{P}$ and
 \end{tabbing}
 
 \begin{enumerate}
-\item Call Row-epitaxial algorithm if reached maximum partitioning depth,
-after re-embedding all probes of $\mathcal{P}$ optimally in regards to the
-pivots:
+\item If $t = t_{max}$ then
   \begin{enumerate}
-  \item If $t = t_{max}$ then
-  \begin{enumerate}
-    \item Re-embed $p_i \in \mathcal{P}$ optimally in regards to $\mathcal{Q}$
-    \item call Row-epitaxial ($R$, $\mathcal{P} \cup \mathcal{Q}$)
-  \end{enumerate}
-  \item Return
+    \item Re-embed $p_i \in \mathcal{P}$ optimally with respect to $\mathcal{Q}$
+    \item Call Row-epitaxial ($R$, $\mathcal{P} \cup \mathcal{Q}$)
+    \item Return
   \end{enumerate}
 \item Choose pivot pair...
 \item Partition the set of pivot candidates...
@@ -686,7 +680,7 @@ their embeddings $wd(q', q'')$ is maximized. The weighted distance equals the
 Hamming distance in case of border length minimization. In case of conflict index
 minimization, the weigthed distance mimics the position-dependent weights $\omega$
 defined in Sect.\,\ref{sec:conflict_index}. The embeddings of the pivots are
-considered fixed; thus, computing $wh(q', q'')$ takes linear time on the length
+considered fixed; thus, computing $wd(q', q'')$ takes linear time on the length
 of their embeddings.
 
 The two pivots $q'$ and $q''$ are then used to divide the set $\mathcal{Q}$
@@ -716,7 +710,7 @@ Each sub-region is then processed recursively. Once the maximum partitioning dep
 $t_{max}$ is reached, the Row-epitaxial~\cite{KAHNG03A} algorithm is
 called to place the probes of $\mathcal{P} \cup \mathcal{Q}$ in the region $R$.
 Before that, however, all probes $p_i \in \mathcal{P}$ are re-embedded optimally
-in regards to the pivots using a special version of the OSPE algorithm that treats
+with respect to the pivots using a special version of the OSPE algorithm that treats
 all pivots as immediate neighbors of $p_i$. This is done before the placement in
 order to ``synchronize'' any skewed embeddings, and to finds an embedding of
 $p_i$ that has minimum conflict with the ``average'' probe in $R$.
@@ -803,6 +797,8 @@ of a probe;
 \item simpler implementation.
 \end{itemize}
 
+\paragraph{Acknowledgments.}We thank Ion Mandoiu, Xu Xu and Sherief Reda for
+providing an implementation of their algorithms.
 
 % ==============================================================================
 \begin{thebibliography}{5}

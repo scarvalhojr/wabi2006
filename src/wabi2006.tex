@@ -84,7 +84,8 @@ ways. An embedding of $p_{i}$ is a $\mu$-tuple
 $\varepsilon_{i} = (e_{i,1}, e_{i,2}, ... e_{i,\mu})$ in which $e_{i,k} = 1$
 if probe $p_{i}$ receives nucleotide $t_{k}$ (at step~$k$), or 0 otherwise
 (Fig.~\ref{fig:masking_process}). In particular, a \emph{left-most embedding}
-is an embedding in which the bases are synthesized as soon as possible.
+is an embedding in which the bases are synthesized as early as possible
+(see $\varepsilon_8$ in Fig.\,\ref{fig:masking_process}).
 
 \begin{figure}
 \centerline{\includegraphics[width=230pt]{chip}}
@@ -94,9 +95,9 @@ sequence and the probe embeddings. On the bottom, the first four resulting masks
 \label{fig:masking_process}
 \end{figure}
 
-The deposition sequence $\mathcal{S}$ often is a repeated
-permutation of the alphabet. \ignore{This is mainly because such sequences maximize the
-number of possible subsequences \cite{CHASE76}}. Then we can
+The deposition sequence is often a repeated
+permutation of the alphabet. \ignore{(this is mainly because such sequences maximize the
+number of possible subsequences \cite{CHASE76})} Then we can
 distinguish between \emph{synchronous} and \emph{asynchronous} embeddings. In
 the first case, each probe has exactly one nucleotide synthesized in every
 cycle of the deposition sequence; hence, 25 cycles or 100 steps are needed to
@@ -122,19 +123,19 @@ given rise to the term \emph{border conflict}.
 
 We are interested in finding an arrangement of the probes on the chip together
 with their embeddings in such a way that the chances of unintended
-illumination during mask exposure steps is minimized. This problem appears to
+illumination during mask exposure steps are minimized. This problem appears to
 be hard because of the exponential number of possible arrangements,
 although we are not aware of an NP-hardness proof.
 In a separate work~\cite{CARVALHO06}, we presented a formulation based on
 the quadratic assignment problem (QAP), a classical combinatorial optimization
-problem that is known to be NP-hard and NP-hard to approximate. Our formulation
-gives further indication that the problem is hard.
+problem that is known to be NP-hard. \ignore{This formulation
+gives further indication that the problem is hard.}
 
 Optimal solutions are thus
 unlikely to be found even for small chips and even if we assume that all probes
-have a single predefined embedding.
-If we consider all possible embeddings (typically several million embeddings exist for a typical probe on Affymetrix arrays), the problem is even
-harder. For this reason, the problem has been traditionally tackled in two
+have a single predefined embedding. If we consider all possible embeddings, the
+problem is even harder (up to several million embeddings may exist for a typical
+Affymetrix probe). For this reason, the problem has been traditionally tackled in two
 phases. First, an initial embedding of the probes is fixed and an arrangement of
 these embeddings on the chip with minimum border conflicts is sought. This is
 usually referred to as the \emph{placement}. Second, a \emph{post-placement}
@@ -411,10 +412,9 @@ sub-regions of the chip. Each sub-region can then be treated as an independent c
 or recursively partitioned. These smaller sub-problems, when solved, immediately
 constitute a final solution. In this way, algorithms with non-linear time or space
 complexities can be used to compute the layout of larger chips that otherwise would not
-be feasible. A partitioning is clearly a compromise in solution quality, but
-for large chips it can have little impact.
+be feasible.
 
-The only known partitioning algorithm is the Centroid-based
+The only partitioning algorithm that we know of is the Centroid-based
 Quadrisection~\cite{KAHNG03B}. It starts by randomly selecting a probe
 $c_1 \in \mathcal{P}$. Then, it selects another probe $c_2$ maximizing
 $h(c_1,c_2)$, the Hamming distance between their embeddings. Similarly, it selects
@@ -466,7 +466,7 @@ re-embedding all probes with the OSPE algorithm. Surprisingly, it achieves the g
 reduction of border conflicts with a running time compared to the Batched Greedy,
 the faster among the three.
 
-The OSPE algorithm can never increase the amount of conflicts in a region.
+The OSPE algorithm never increases the amount of conflicts in a region.
 All optimization algorithms can thus be executed several times until
 a local optimal solution is found, or until the improvements drop below a given threshold.
 
@@ -477,9 +477,9 @@ a local optimal solution is found, or until the improvements drop below a given 
 
 The Optimum Single Probe Embedding~\cite{KAHNG02} is a dynamic programming
 algorithm that computes the optimum embedding of a probe $p$ on a spot $s$
-with respect to its neighboring probes whose embeddings are fixed. We first present
-a general formulation for conflict index minimization; later we show the
-formulation for border length minimization as a special case.
+with respect to its neighboring probes whose embeddings are fixed. It was originally
+designed for border length minimization; here we present a formulation for conflict
+index minimization.
 
 The OSPE can be seen as a special case of a global alignment between the
 sequence $p$ of length $\ell$ and the deposition sequence $\mathcal{S}$ of length
@@ -521,29 +521,28 @@ U_{j} := \sum_{s'} \omega(s',j) \cdot (d(s',s))^{-2},
 where $d(s',s)$ is the Euclidean distance between spots~$s'$ and~$s$, and
 $\omega(s',j)$ is as defined in~(\ref{eq:pos_mult}).
 
-\paragraph{Border length minimization.} To do.
-
-\paragraph{Remarks.}
+The first column of $D$ is initialized as follows: $D[0,0] = 0$ and $D[i,0] = \infty$
+for $0 < i \leq \ell$.
 The time complexity of the OSPE algorithm is $O(\ell_p \cdot |\mathcal{S}|)$,
 where $\ell_p$ is the length of probe $p$ and $|\mathcal{S}|$ is the length of
 the deposition sequence~\cite{KAHNG02}.
 
+\ignore{
 The three algorithms mentioned in Sect.\,\ref{sec:previous_work} were developed with
 the aim of reducing border conflicts. The Batched Greedy and the Sequential algorithms,
 however, can also be used to reduce the sum of conflict indices by using the OSPE as
 decribed here.
+}
 
 % ==============================================================================
 \section{Pivot Partitioning}
 % ==============================================================================
 \label{sec:pivotpart}
 
-Traditionally, the microarray layout problem has been tackled in two phases. First,
-an initial embedding of the probes is fixed and an arrangement of these sequences
-on the chip is produced by a placement algorithm. Then, a post-placement optimization
-phase re-embeds the probes using the OSPE algorithm to achive further reduction in
-conflicts. We believe that better layouts can be produced if the placement phase
-also considers
+Traditionally, the microarray layout problem has been tackled in two phases:
+placement, during which an initial embedding of the probes is fixed, and
+post-placement optimization, when probes are re-embedded using the OSPE algorithm.
+We believe that better layouts can be produced if the placement phase also considers
 the various embeddings that a probe can have. In this section we propose a new
 partitioning algorithm called Pivot Partitioning (PP).
 
@@ -610,8 +609,8 @@ since less candidates need to be examined.
 Second, probes with fewer embeddings are better representatives to drive
 the partitioning. The problem is that some embeddings have their unmasked steps
 concentrated in one region of the deposition sequence. This is specially true if
-the probes are embedded in a left-most fashion (such as $\varepsilon_8$ in
-Fig.\,\ref{fig:masking_process}). Some Affymetrix probes, for instance, in a
+the probes are embedded in a left-most fashion.
+Some Affymetrix probes, for instance, in a
 left-most embeddeding, can be synthesized in the first 37 masking steps, thus
 using only half of the total 74 steps. Such probes are clearly not good choices
 for pivots. Probes with the minimum number of embeddings, on the other hand,
@@ -733,10 +732,10 @@ Dim & & \multicolumn{1}{c}{$L=0$} & \multicolumn{1}{c}{$t_{max}=0$} & & \multico
 \noalign{\smallskip}
 \cline{1-1} \cline{3-4} \cline{6-7} \cline{9-10} \cline{12-13}
 \noalign{\smallskip}
-$100$ & & \   415,227 & \ -3.00\% & & \   393,218 & \ 0.16\% & & \   399,312 & \ -1.98\% & & \   410,608 & \ -2.87\% \\
-$200$ & & \ 1,608,382 & \         & & \ 1,524,803 & \        & & \ 1,545,825 & \         & & \ 1,573,096 & \         \\
-$300$ & & \ 3,529,745 & \         & & \ 3,493,552 & \        & & \ 3,413,316 & \         & & \ 3,434,964 & \         \\
-$500$ & & \ 9,463,941 & \         & & \ 9,546,351 & \ 7.87\% & & \ 9,355,231 & \  4.67\% & & \ 9,307,510 & \  1.03\% \\
+100 & & \   415,227 & \ -3.00\% & & \   393,218 & \ 0.16\% & & \   399,312 & \ -1.98\% & & \   410,608 & \ -2.87\% \\
+200 & & \ 1,608,382 & \         & & \ 1,524,803 & \        & & \ 1,545,825 & \         & & \ 1,573,096 & \         \\
+300 & & \ 3,529,745 & \         & & \ 3,493,552 & \        & & \ 3,413,316 & \         & & \ 3,434,964 & \         \\
+500 & & \ 9,463,941 & \         & & \ 9,546,351 & \ 7.87\% & & \ 9,355,231 & \  4.67\% & & \ 9,307,510 & \  1.03\% \\
 \noalign{\smallskip}
 \hline
 \end{tabular}}}
@@ -755,10 +754,10 @@ Dim & & \multicolumn{1}{c}{$L=0$} & \multicolumn{1}{c}{$t_{max}=0$} & & \multico
 \noalign{\smallskip}
 \cline{1-1} \cline{3-4} \cline{6-7} \cline{9-10} \cline{12-13}
 \noalign{\smallskip}
-$100$ & & \    108 & \   000 & & \ 36.1\% & \   000 & & \   399,312 & \   000 & & \   410,608 & \   000 \\
-$200$ & & \  1,151 & \ 0,000 & & \    992 & \ 0,000 & & \ 1,545,825 & \ 0,000 & & \ 1,573,096 & \ 0,000 \\
-$300$ & & \  3,671 & \ 0,000 & & \  3,529 & \ 0,000 & & \ 3,413,316 & \ 0,000 & & \ 3,434,964 & \ 0,000 \\
-$500$ & & \ 10,630 & \ 0,000 & & \ 10,591 & \ 0,000 & & \ 9,355,231 & \ 0,000 & & \ 9,307,510 & \ 0,000  \\
+100 & & \    108 & \   000 & & \ 36.1\% & \   000 & & \   399,312 & \   000 & & \   410,608 & \   000 \\
+200 & & \  1,151 & \ 0,000 & & \    992 & \ 0,000 & & \ 1,545,825 & \ 0,000 & & \ 1,573,096 & \ 0,000 \\
+300 & & \  3,671 & \ 0,000 & & \  3,529 & \ 0,000 & & \ 3,413,316 & \ 0,000 & & \ 3,434,964 & \ 0,000 \\
+500 & & \ 10,630 & \ 0,000 & & \ 10,591 & \ 0,000 & & \ 9,355,231 & \ 0,000 & & \ 9,307,510 & \ 0,000  \\
 \noalign{\smallskip}
 \hline
 \multicolumn{13}{c}{TODO: substitute time in seconds for a percentage of the time with no partitioning.}
@@ -785,6 +784,9 @@ trend toward reduction or increase in border length as $L$ varies from~0 to~3.}
 \section{Discussion}
 % ==============================================================================
 \label{sec:discuss}
+
+A partitioning is clearly a compromise in solution quality, but
+for large chips it can have little impact.
 
 We believe that the main advantages of our
 approach over the CQ algorithm are:

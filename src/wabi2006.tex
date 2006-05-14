@@ -528,10 +528,10 @@ to have an embedding with fewer conflicts than a probe that has
 only a limited number of embeddings.
 
 We use the probes with fewer embeddings, that we call ``pivots'', to drive the
-partitioning of the probe set and to re-embed the the probes just before their
+partitioning of the probe set and to re-embed the probes just before their
 placement (as a partitioning algorithm, the PP also works in combination with
-another placement algorithm). Our algorithm works for border length minimization
-as well as conflict index minimization.
+another placement algorithm). Also, we designed our algorithm to work for border
+length minimization as well as conflict index minimization.
 
 \begin{algorithm}
 \caption{Pivot Partitioning}
@@ -539,25 +539,24 @@ as well as conflict index minimization.
 \begin{minipage}{4.8in}
 
 \begin{tabbing}
-Output: \=                                  \kill
-Input:  \> chip dimension,                          \\
-        \> set of probes $\mathcal{P} = \{p_{1}, p_{2}, ... p_{n}\}$,       \\
-        \> maximum partitioning depth $t_{max}$                 \\
-Output: \> placement of the probes $p_i$ on the chip
+Output: \=									\kill
+Input:  \> chip dimension,							\\
+        \> set of probes $\mathcal{P} = \{p_{1}, p_{2}, ... p_{n}\}$, 		\\
+        \> maximum partitioning depth $t_{max}$					\\
+Output: \> placement of the probes $p \in \mathcal{P}$ on the chip
 \end{tabbing}
 
 \begin{enumerate}
 \item Select probes $p$ with minimum number of embeddings, $E(p)$,
 as pivot candidates:
   \begin{enumerate}
-  \item Let $\mathcal{Q} = \{p \in \mathcal{P} | E(p) = \min E(p_i) \forall p_i \in \mathcal{P} \}$
+  \item Let $\mathcal{Q} = \{p \in \mathcal{P} | E(p) = \min_{p' \in \mathcal{P}} E(p')\}$
   \item Set $\mathcal{P} \leftarrow \mathcal{P} - Q$
   \end{enumerate}
 \item Define a region $R$ of the chip containing all of its rows and columns
-\item Call the Recursive Partitioning with the initial partitioning depth $t$:
+\item Call the Recursive Partitioning with the initial partitioning depth 1:
   \begin{enumerate}
-  \item Set $t \leftarrow 1$
-  \item Call Recursive Partitioning ($t$, $t_{max}$, $R$, $\mathcal{Q}$, $\mathcal{P}$)
+  \item Return Recursive Partitioning (1, $t_{max}$, $R$, $\mathcal{Q}$, $\mathcal{P}$)
   \end{enumerate}
 \end{enumerate}
 
@@ -571,30 +570,26 @@ The first step of the Pivot Partitioning (Algorithm\,\ref{alg:pivotpart}), is to
 select the pivot candidates $\mathcal{Q}$, a set of probes that can later be
 chosen as pivots. Our pivots are the equivalent of the centroids of the CQ
 algorithm; they are used to partition the probe set. Their
-selection, however, is restricted to the probes having the least number of
-embeddings.
+selection, however, is restricted to the probes having fewer embeddings.
 
 The reasons are two-fold. First, less time is spent choosing the pivots
 since less candidates need to be examined.
 Second, probes with fewer embeddings are better representatives to drive
-the partitioning. The problem is that some embeddings have their unmasked steps
+the partitioning. The problem is that some embeddings may have their unmasked steps
 concentrated in one region of the deposition sequence. This is specially true if
-the probes are embedded in a left-most fashion.
-Some Affymetrix probes, for instance, in a
-left-most embeddeding, can be synthesized in the first 37 masking steps, thus
+the probes are embedded in a left-most or right-most fashion.
+Some Affymetrix probes, for instance,
+can be synthesized in the first 37 masking steps, thus
 using only half of the total 74 steps. Such probes are clearly not good choices
-for pivots. Probes with the minimum number of embeddings, on the other hand,
-are guaranteed to cover most (if not all) cycles of the deposition sequence,
-and are thus a better choices for pivots.
+for pivots. Probes with fewer embeddings, on the other hand,
+are guaranteed to cover most (if not all) cycles of the deposition sequence.
 
-In order to guarantee a good partitioning, $\mathcal{Q}$ must have a reasonable
-amount of probes. This is because the pivots later chosen for the partitioning
-must maximize the distance between their embeddings, just like in the CQ
-algorithm. We thus limit the size of $\mathcal{Q}$ to a minimum of 1\% of the total
+In order to guarantee a good partitioning,
+we limit the size of $\mathcal{Q}$ to a minimum of 1\% of the total
 number of probes\footnote{Usually, around 1-2\% of the probes of an Affymetrix array
 have only one possible embedding; or two, if we consider that they appear in PM/MM
 pairs and must be ``aligned'' in all but the steps that synthesize their middle
-bases}, which may force the selection of probes with the next minimum
+bases}. This is achieved by selecting probes with the next minimum
 number of embeddings.
 Computing the number of embeddings of a probe takes $O(\ell \mu)$ time, where
 $\ell$ is the length of the probe and $\mu$ is the length of the deposition sequence.
@@ -610,107 +605,122 @@ a few minutes.
 \begin{minipage}{4.8in}
 
 \begin{tabbing}
-Output: \=                                  \kill
-Input:  \> current depth level $t$,                     \\
-        \> maximum depth level $t_{max}$                    \\
-        \> rectangular region $R$ of the chip,                  \\
-        \> set of pivot candidates $\mathcal{Q}$,               \\
-        \> set of probes $\mathcal{P}$,                     \\
-Output: \> placement of the probes $p_i \in \mathcal{P}$ and
-           $q_i \in \mathcal{Q}$ on the region $R$ of the chip
+Output: \=									\kill
+Input:  \> current depth level $t$,						\\
+        \> maximum depth level $t_{max}$					\\
+        \> rectangular region $R$ of the chip,					\\
+        \> set of pivot candidates $\mathcal{Q}$,				\\
+        \> set of probes $\mathcal{P}$,						\\
+Output: \> placement of the probes $p \in \mathcal{P}$ and
+           $q \in \mathcal{Q}$ on the region $R$ of the chip
 \end{tabbing}
 
 \begin{enumerate}
 \item If $t = t_{max}$ then
   \begin{enumerate}
-    \item Re-embed $p_i \in \mathcal{P}$ optimally with respect to $\mathcal{Q}$
-    \item Call Row-epitaxial ($R$, $\mathcal{P} \cup \mathcal{Q}$)
-    \item Return
+    \item Re-embed $p \in \mathcal{P}$ optimally with respect to all $q \in \mathcal{Q}$
+    \item Return Row-epitaxial ($R$, $\mathcal{P} \cup \mathcal{Q}$)
   \end{enumerate}
-\item Choose pivot pair...
-\item Partition the set of pivot candidates...
-\item Partition the set of probes...
-\item Partition the chip region...
-\item Recursive calls...
+\item Select $q'$ and $q'' \in \mathcal{Q}$ such that $h(q',q'') = \max_{i,j \in \mathcal{Q}} h(i,j)$
+\item \label{step:part_pivots} Partition the set of pivot candidates:
+  \begin{enumerate}
+    \item $\mathcal{Q}' = \{q \in \mathcal{Q} | h(q,q') < h(q,q'')\}$
+    \item $\mathcal{Q}'' = \{q \in \mathcal{Q} | h(q,q'') < h(q,q')\}$ \\
+    (when $h(q,q') = h(q,q'')$, assignments are made in an attempt to
+    achieve balanced partitionings)
+  \end{enumerate}
+\item Partition the set of probes:
+  \begin{enumerate}
+    \item $\mathcal{P}' = \{p \in \mathcal{P} | w(p,q') < w(p,q'')\}$
+    \item $\mathcal{P}'' = \{p \in \mathcal{P} | w(p,q'') < w(p,q')\}$ \\
+    (when $h(p,q') = h(p,q'')$, assignments are made in an attempt to
+    achieve balanced partitionings)
+  \end{enumerate}
+\item \label{step:part_r} Partition $R$ into two sub-regions proportionally to the number of probes
+      in $\mathcal{P}' \cup \mathcal{Q}'$ and $\mathcal{P}'' \cup \mathcal{Q}''$
+\item Return Recursive Partitioning ($t + 1$, $t_{max}$, $R'$, $\mathcal{Q}'$, $\mathcal{P}$') \\
+      $\cup$ Recursive Partitioning ($t + 1$, $t_{max}$, $R''$, $\mathcal{Q}''$, $\mathcal{P}$'')
 \end{enumerate}
 
 \end{minipage}
 \end{algorithm}
 
 The essence of the Pivot Partitioning algorithm is its recursive procedure
-(Algorithm\,\ref{alg:recursivepart}), that is executed until a given maximum
-recursion depth $t_{max}$ is reached. Its main arguments are the set of probes
-$\mathcal{P}$, the set of pivot candidates $\mathcal{Q}$ and a rectangular region
-of the chip $R$, which consists of a range of rows and columns.
+(Algorithm\,\ref{alg:recursivepart}), that is executed until a given
+recursion depth $t_{max}$ is reached.
 
-Initially, a pair of pivots $q'$ and $q'' \in \mathcal{Q}$ is chosen among all
-possible pairs of pivot candidates in such a way that the weighted distance between
-their embeddings $wd(q', q'')$ is maximized. The weighted distance equals the
-Hamming distance in case of border length minimization. In case of conflict index
-minimization, the weigthed distance mimics the position-dependent weights $\omega$
-defined in Sect.\,\ref{sec:conflict_index}. The embeddings of the pivots are
-considered fixed; thus, computing $wd(q', q'')$ takes linear time on the length
-of their embeddings.
+If the maximum recursion depth has not been reached yet, we choose a pair of
+pivots $q'$ and $q'' \in \mathcal{Q}$ with maximum Hamming distance
+between their embeddings, $h(q',q'')$. All other $q \in \mathcal{Q}$ are
+assigned to a sub-set of $\mathcal{Q}$ associated with the pivot whose
+Hamming distance to $q$ is minimum (step~\ref{step:part_pivots}).
 
-The two pivots $q'$ and $q''$ are then used to divide the set $\mathcal{Q}$
-by computing the weighted distance between the embeddings of $q_i \in \mathcal{Q}$
-and the embeddings of the chosen pivots, assigning $q_i$ to $\mathcal{Q}'$ if
-$wd(q_i, q') < wd(q_i, q'')$ or to $\mathcal{Q}''$ if $wd(q_i, q'') < wd(q_i, q')$.
-In case of draws, the assignments are made in an attempt to
-achieve balanced partitionings. Again, the distances are computed in linear time
-since embeddings of pivot candidates are also considered fixed.
+The next step similarly partitions $\mathcal{P}$ into two sub-sets. A probe
+$p \in \mathcal{P}$ is assigned to the sub-set associated with the pivot $q$
+with minimum weighted distance $w(p,q)$. The weighted distance is computed
+with the OSPE algorithm, ignoring the location of the probes since they have
+not been placed yet. In this way, we make the assignments considering all
+possible embeddings of $p$.
 
-In the next step, the set $\mathcal{P}$ of probes is partitioned. For all probes
-$p_i \in \mathcal{P}$, we compute the minimum weighted distance that any embedding
-of $p_i$ can have to the embeddings of the pivots $q'$ and $q''$, assigning it to
-one of the sub-set $\mathcal{P}'$ and $\mathcal{P}''$ associated with the pivot
-with the minimum distance. This is done with a special version of the OSPE algorithm
-that ignores the location of the probes.
-
-After the partitioning of $\mathcal{P}$ and $\mathcal{Q}$, we can then divide the
-region $R$ of the chip into two sub-regions $R'$ and $R''$, proportionally to the
+Step \ref{step:part_r} partitions $R$ into two sub-regions, proportionally to the
 number of probes in $\mathcal{Q}' \cup \mathcal{P}'$ and $\mathcal{Q}'' \cup \mathcal{P}''$.
 We alternate between horizontal and vertical divisions at each partitioning depth $t$.
 Since we only deal with rectangular regions, sometimes it is necessary to move
 a few probes from one partition to the other in order to ensure that the probes
-will fit in the sub-regions.
+fit in the sub-regions.
 
 Each sub-region is then processed recursively. Once the maximum partitioning depth
 $t_{max}$ is reached, the Row-epitaxial~\cite{KAHNG03A} algorithm is
 called to place the probes of $\mathcal{P} \cup \mathcal{Q}$ in the region $R$.
 Before that, however, all probes $p_i \in \mathcal{P}$ are re-embedded optimally
-with respect to the pivots using a special version of the OSPE algorithm that treats
-all pivots as immediate neighbors of $p_i$. This is done before the placement in
-order to ``synchronize'' any skewed embeddings, and to finds an embedding of
-$p_i$ that has minimum conflict with the ``average'' probe in $R$.
+with respect to the pivots. Again, we use the OSPE algorithm ignoring their location.
+This is done to help the placement algorithm by improving the ``alignment'' of all
+embeddings in the region.
 
 % ==============================================================================
 \section{Results}
 % ==============================================================================
 \label{sec:results}
 
+We first compare how the Pivot Partitioning (PP) performs in comparison to the
+Centroid-based Quadrisection (CQ) in terms of border length
+(Table~\ref{tab:pp_x_cq_bl}).
+Equivalence of partitioning depths.
+This is sync embeddings, async are likely to be better.
+
 \begin{table}
 \label{tab:pp_x_cq_bl}
-\caption{Improvements of Pivot Partitioning (PP) over Centroid-based Quadrisection (CQ) with
-varying partitioning depths. Border length comparison. After running Sequential
-optimization. Chips with random probes, synchronously embedded.}
+\caption{Comparison between Pivot Partitioning (PP) and Centroid-based Quadrisection (CQ)
+on random chips with dimensions ranging from $100\times 100$ to $500\times 500$, whose probes
+are synchronously embeded in a deposition sequence of length 100. The partitioning
+depths varies from $L=1$ to $L=3$ for the CQ algorithm and, equivalently, from
+$t_{max}=2$ to $t_{max}=6$ for PP. The data shows the total border length of chips
+produced by the CQ (extracted from~\cite{KAHNG03B}), and the results of using the PP on
+similar input, as percentage of the reduction in border length compared to the CQ.
+Both partitionings use Row-epitaxial for the placement with $Q = 20\,000$, and are followed
+by the Sequential post-placement optimization.}
 \centerline{\scriptsize{
-\begin{tabular}{clrrlrrlrrlrr}
-& & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} \\
+\begin{tabular}{clrrlrrlrr}
+& & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} & & \multicolumn{1}{c}{CQ} & \multicolumn{1}{c}{PP} \\
 \noalign{\smallskip}
-Dim & & \multicolumn{1}{c}{$L=0$} & \multicolumn{1}{c}{$t_{max}=0$} & & \multicolumn{1}{c}{$L=1$} & \multicolumn{1}{c}{$t_{max}=2$} & & \multicolumn{1}{c}{$L=2$} & \multicolumn{1}{c}{$t_{max}=4$} & & \multicolumn{1}{c}{$L=3$} & \multicolumn{1}{c}{$t_{max}=6$} \\
+Dim & & \multicolumn{1}{c}{$L=1$} & \multicolumn{1}{c}{$t_{max}=2$} & & \multicolumn{1}{c}{$L=2$} & \multicolumn{1}{c}{$t_{max}=4$} & & \multicolumn{1}{c}{$L=3$} & \multicolumn{1}{c}{$t_{max}=6$} \\
 \noalign{\smallskip}
-\cline{1-1} \cline{3-4} \cline{6-7} \cline{9-10} \cline{12-13}
+\cline{1-1} \cline{3-4} \cline{6-7} \cline{9-10}
 \noalign{\smallskip}
-100 & & \   415,227 & \ -3.00\% & & \   393,218 & \ 0.16\% & & \   399,312 & \ -1.98\% & & \   410,608 & \ -2.87\% \\
-200 & & \ 1,608,382 & \         & & \ 1,524,803 & \        & & \ 1,545,825 & \         & & \ 1,573,096 & \         \\
-300 & & \ 3,529,745 & \         & & \ 3,493,552 & \        & & \ 3,413,316 & \         & & \ 3,434,964 & \         \\
-500 & & \ 9,463,941 & \         & & \ 9,546,351 & \ 7.87\% & & \ 9,355,231 & \  4.67\% & & \ 9,307,510 & \  1.03\% \\
+100 & & \   393,218 & \ 0.16\% & & \   399,312 & \ -1.98\% & & \   410,608 & \ -2.87\% \\
+200 & & \ 1,524,803 & \        & & \ 1,545,825 & \         & & \ 1,573,096 & \         \\
+300 & & \ 3,493,552 & \        & & \ 3,413,316 & \         & & \ 3,434,964 & \         \\
+500 & & \ 9,546,351 & \ 7.87\% & & \ 9,355,231 & \  4.67\% & & \ 9,307,510 & \  1.03\% \\
 \noalign{\smallskip}
 \hline
 \end{tabular}}}
 \end{table}
 
+\ignore{
+\multicolumn{10}{c}{Experiments for PP were conducted on a Sun Fire V1280 server with 900Mhz UltraSparc III+ processors and 96 Gb of RAM under similar load balances.}
+}
+
+\ignore{
 \begin{table}
 \label{tab:pp_x_cq_time}
 \caption{Reduction in running time of both Pivot Partitioning (PP) and Centroid-based Quadrisection (CQ) with
@@ -733,6 +743,7 @@ Dim & & \multicolumn{1}{c}{$L=0$} & \multicolumn{1}{c}{$t_{max}=0$} & & \multico
 \multicolumn{13}{c}{TODO: substitute time in seconds for a percentage of the time with no partitioning.}
 \end{tabular}}}
 \end{table}
+}
 
 
 \ignore{

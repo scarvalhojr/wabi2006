@@ -149,8 +149,8 @@ form the objective functions that we aim to minimize. As a refinement of the
 ``classical'' border length of photolithographic masks, we introduce the
 \emph{conflict index} measure. Section~\ref{sec:previous_work} reviews
 existing placement, partitioning, and post-placement strategies.  In
-Section~\ref{sec:ospe} we discuss new variants of an optimal single probe
-embedding (OSPE) algorithm that first appeared in~\cite{KAHNG02}. Our pivot
+Section~\ref{sec:ospe} we discuss a new variant of an optimal single probe
+embedding (OSPE) algorithm that first appeared in~\cite{KAHNG02}. Our
 partitioning strategy that for the first time combines partitioning the chip
 with embedding the probes, is described in Section~\ref{sec:pivotpart}, and
 computational results follow in Section~\ref{sec:results}.
@@ -215,10 +215,10 @@ This form of weighting function is the same as suggested in
 \cite{KAHNG03A}.  Note that $\delta$ is a ``closeness'' measure
 between $s$ and $s'$ only if $s'$ is
 not masked (and thus creates the potential of illumination at $s$). To
-restrict the number of neighbors that need to be considered, we
+limit the number of neighbors that need to be considered, we
 restrict the support of $\delta(s,s',\cdot)$ to those $s'\neq s$ that
 are in a $7\times 7$ grid centered around $s$ (see
-Fig.\,\ref{fig:conflictindex}~top).
+Fig.\,\ref{fig:conflictindex}~left).
 
 
 We also define position-dependent weights to account for observation b):
@@ -243,7 +243,7 @@ is the distance, from the start or end of the final probe sequence, of the
 last base synthesized before step $k$: $b_{s,k}$ denotes the number of
 nucleotides synthesized at spot~$s$ up to and including step~$k$, and
 $\ell_s$ is the probe length (see Fig.\,\ref{fig:conflictindex}
-bottom).
+right).
 
 The motivation behind an exponentially increasing weighting function is that
 the probability of a successful stable hybridization of a probe with its
@@ -269,7 +269,7 @@ We define the conflict index of a spot $s$ as
 %%
 where $s'$ ranges over all spots that are at most three cells away
 from $s$.  $\mathcal{C}(s)$ can be interpreted as the fraction of
-faulty probes (because of unwanted illumination) produced at spot $s$.
+faulty probes produced at spot $s$ (because of unwanted illumination).
 
 \begin{figure}
 \centerline{
@@ -309,10 +309,10 @@ faulty probes (because of unwanted illumination) produced at spot $s$.
 \label{fig:conflictindex}
 \end{figure}
 
-The following relation between conflict indices and border lengths holds when
-we define $\delta(s,s',k):=1$ if $s'$ is a direct neighbor of $s$ and is
-unmasked in step $k$, and $:=0$ otherwise, and $\omega(s,k):=1$ if $s$ is
-masked in step $k$, and $:=0$ otherwise: Then $\sum_s\, \mathcal{C}(s) = 2
+We note the following relation between conflict indices and border lengths.
+Define $\delta(s,s',k):=1$ if $s'$ is a direct neighbor of $s$ and is
+unmasked in step $k$, and $:=0$ otherwise; and $\omega(s,k):=1$ if $s$ is
+masked in step $k$, and $:=0$ otherwise. Then $\sum_s\, \mathcal{C}(s) = 2
 \sum_{k=1}^\mu\, \mathcal{B}_k$, as each border conflict is counted twice,
 once for $s$ and once for $s'$. Therefore border length and total conflict are
 equivalent for a particular choice of $\delta$ and $\omega$. For our
@@ -362,14 +362,14 @@ suggests a different threading of the TSP tour on the chip, called
 %  
 }
 
-A different strategy called the \emph{Epitaxial} placement algorithm
+A different strategy called \emph{Epitaxial} placement
 \cite{KAHNG02} places a random probe in the center of the array and continues
 to insert probes in spots adjacent to already filled spots. Priority is given
 to spots with the largests numbers of filled neighbors. At each iteraction, it
 examines all non-filled spots~$s_i$ and finds a non-assigned probe $p_j$ with
 minimum sum of Hamming distances $H_{ij}$ to the neighboring probes, employing
 a greedy heuristic to select the next spot.  A further 10\% reduction in
-border conflict over TSP~+~1-threading is claimed.
+border conflict over TSP\,+\,1-threading is claimed.
 
 \ignore{
 The major problem with the Epitaxial and the TSP-based algorithm is that they
@@ -400,7 +400,7 @@ spots are filled in a pre-defined order, namely from top to bottom, left to
 right, and only probes of a limited list of candidates are considered when
 filling each spot. Experiments show that Row-epitaxial is the best
 large-scale placement algorithm, achieving up to 9\% reduction in border
-length over the TSP+1-threading.
+length over the TSP\,+\,1-threading.
 
 
 \paragraph{Partitioning Algorithms.}
@@ -412,12 +412,12 @@ final solution. In this way, algorithms with non-linear time or space
 complexities can be used to compute the layout of larger chips that otherwise
 would not be feasible.
 
-The only partitioning algorithm that we know of is Centroid-based
-Quadrisection (CQ)~\cite{KAHNG03B}. It starts by randomly selecting a probe
+The only partitioning that we know of is the Centroid-based
+Quadrisection~\cite{KAHNG03B}. It starts by randomly selecting a probe
 $c_1 \in \mathcal{P}$. Then, it selects another probe $c_2$ maximizing
 $h(c_1,c_2)$, the Hamming distance between their embeddings. Similarly, it
 selects $c_3$ and $c_4$ maximizing the sum of Hamming distance between these
-four probes, that are called centroids. All other probes $p_i \in \mathcal{P}$
+four probes that are called centroids. All other probes $p_i \in \mathcal{P}$
 are then compared to the centroids and assigned to the sub-set $\mathcal{P}_j$
 associated with $c_j$ with minimum $h(p_i,c_j)$. The chip is divided into four
 quadrants, each being assigned to a sub-set $\mathcal{P}_j$ .  The procedure
@@ -474,7 +474,7 @@ threshold.
 \section{Optimum Single Probe Embedding}
 \label{sec:ospe}
 
-The Optimum Single Probe Embedding (OSPE) algorithm finds the optimal
+The Optimum Single Probe Embedding (OSPE) algorithm finds an optimal
 embedding of a single probe on a given spot, assuming that all neighboring
 embeddings are fixed. It can be seen as a special case of a global alignment
 between the probe sequence $p$ of length $\ell$ and the deposition sequence
@@ -491,10 +491,9 @@ the costs resulting from each possible action:
 \[
 D[i,j] = \min (D[i,j-1] + M_{ij}, D[i-1,j-1] + U_{j}).
 \]
-%%
-The costs $M_{ij}$ and $U_{j}$ depend on the spot $s$ and the neighboring
-spots $s'$:
 
+The costs $M_{ij}$ and $U_{j}$ depend on the spot $s$ and the neighboring
+spots $s'$.
 $M_{ij}$ denotes the cost of masking spot $s$ at step $j$ given that base $i$
 of probe $p$ has been synthesized previously.  Any unmasked neighbor $s'$
 generates a conflict on $s$ with cost $\omega(s,i)\cdot \delta(s,s',j)$;
@@ -509,7 +508,6 @@ conflict on each masked neighbor $s'$ with cost $\omega(s',j)\cdot
 The first column of $D$ is initialized as follows: $D[0,0] = 0$ and $D[i,0] =
 \infty$ for $0 < i \leq \ell$. The first row is $D[0,j] = D[0,j-1]+M_{0j}$ for
 $0<j\leq\mu$.
-
 The time complexity of the OSPE algorithm is obviously $O(\ell_p \cdot
 |\mathcal{S}|)$, where $\ell_p$ is the length of probe $p$ and $|\mathcal{S}|$
 is the length of the deposition sequence.

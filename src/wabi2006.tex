@@ -143,7 +143,6 @@ additional freedom and achieve reasonable running times in practice. In fact,
 so far we know of no single publication that merges the two phases; in this
 article we propose such a strategy called \emph{pivot partitioning}.
 
-
 The rest of this paper is structured as follows. Section~\ref{sec:eval}
 details two different ways of evaluating computed layouts and embeddings; they
 form the objective functions that we aim to minimize. As a refinement of the
@@ -240,8 +239,8 @@ where $c>0$ and $\theta>0$ are constants, and
   \lambda(s,k) := 1 + \min(b_{s,k},\ell_{s} - b_{s,k})
 \end{equation}
 %%
-is the distance of the probe length after $k$ synthesis steps
-from the start or end of the final probe: $b_{s,k}$ denotes the number of
+is the distance, from the start or end of the final probe sequence, of the
+last base synthesized before step $k$: $b_{s,k}$ denotes the number of
 nucleotides synthesized at spot~$s$ up to and including step~$k$, and
 $\ell_s$ is the probe length (see Fig.\,\ref{fig:conflictindex}
 bottom).
@@ -561,7 +560,7 @@ Output: \> placement of the probes $p \in \mathcal{P}$ on the chip
 \item Select probes $p$ with minimum number of embeddings, $E(p)$,
 as pivot candidates:
   \begin{enumerate}
-  \item Let $\mathcal{Q} = \{p \in \mathcal{P} | E(p) is minimal\}$
+  \item Let $\mathcal{Q} = \{p \in \mathcal{P} | E(p) \mbox{ is minimal}\}$
   \item Set $\mathcal{P} \leftarrow \mathcal{P} \setminus Q$
   \end{enumerate}
 \item Define a region $R$ of the chip containing all of its rows and columns

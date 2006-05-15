@@ -148,9 +148,14 @@ The rest of this paper is structured as follows. Section~\ref{sec:eval}
 details two different ways of evaluating computed layouts and embeddings; they
 form the objective functions that we aim to minimize. As a refinement of the
 ``classical'' border length of photolithographic masks, we introduce the
-\emph{conflict index}. Section~\ref{sec:previous_work} reviews some of the
-existing placement and post-placement strategies.  XXX
-% TODO finish this paragraph
+\emph{conflict index} measure. Section~\ref{sec:previous_work} reviews
+existing placement, partitioning, and post-placement strategies.  In
+Section~\ref{sec:ospe} we discuss new variants of an optimal single probe
+embedding (OSPE) algorithm that first appeared in~\cite{KAHNG02}. Our pivot
+partitioning strategy that for the first time combines partitioning the chip
+with embedding the probes, is described in Section~\ref{sec:pivotpart}, and
+computational results follow in Section~\ref{sec:results}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -321,35 +326,41 @@ low average conflict index.
 \section{Previous Work}
 \label{sec:previous_work}
 
+Up to now, the tasks of probe placement and probe embedding (``post-placement
+optimization'') were considered separateky. Placement is often handled by
+(recursively) partitioning the chip into smaller regions before applying a
+placement algorithm. We now review existing placement algorithms, partitioning
+algorithms and post-placement strategies.
+
+\paragraph{Placement Algorithms.}
 The border length problem on large oligonucleotide arrays of arbitrary probes
 was first formally addressed in~\cite{HANNENHALLI02}. The article reports that
 the first Affymetrix chips were designed using a heuristic for the traveling
 salesman problem (TSP). The idea consists of building a weighted graph with
 nodes representing probes, and edges containing the Hamming distance between
 the probe sequences. A TSP tour is approximated, resulting in consecutive
-probes in the tour being likely to be similar. The TSP tour is then
+probes in the tour being likely similar. The TSP tour is then
 \emph{threaded} on the array in a row-by-row fashion.  \cite{HANNENHALLI02}
 suggests a different threading of the TSP tour on the chip, called
 \emph{1-threading}, to achieve up to 20\% reduction in border length.
 
 % old version of paragraph about Epitaxial alg.
-\ignore{
-Kahng~{\it et~al}.~\cite{KAHNG02} propose the \emph{Epitaxial} placement algorithm that
-places a random probe in the center of the array and continues to
-insert probes in spots adjacent to already filled spots, employing a
-greedy heuristic to select the next spot to be filled and the probe
-that is assigned to it. Priority is given to spots whose
-neighbors are already filled, in which case the algorithm places the
-probe with minimum sum of Hamming distances to its neighbors. If no
-such a spot exists, the algorithm examines all non-filled spots~$s_i$
-with $n_i \geq 1$ filled neighbors and finds a non-assigned probe
-$p_j$ with minimum sum of Hamming distances to the neighboring probes
-$H_{ij}$. For each possible assignment of $p_j$ to $s_i$, it computes
-a cost $c(s_i,p_j) := k_{n_i} H_{ij} / n$, where $k_{n_i}$ are scaling
-coefficients ($k_1 = 1$, $k_2 = 0.8$, and $k_3 = 0.6$), and makes the
-assignment with minimum cost. With this algorithm, they claimed to
-achieve up to 10\% reduction in border conflicts over the TSP-based
-approach of Hannenhalli~{\it et~al}.\ \cite{HANNENHALLI02}.
+\ignore{ Kahng~{\it et~al}.~\cite{KAHNG02} propose the \emph{Epitaxial}
+  placement algorithm that places a random probe in the center of the array
+  and continues to insert probes in spots adjacent to already filled spots,
+  employing a greedy heuristic to select the next spot to be filled and the
+  probe that is assigned to it. Priority is given to spots whose neighbors are
+  already filled, in which case the algorithm places the probe with minimum
+  sum of Hamming distances to its neighbors. If no such a spot exists, the
+  algorithm examines all non-filled spots~$s_i$ with $n_i \geq 1$ filled
+  neighbors and finds a non-assigned probe $p_j$ with minimum sum of Hamming
+  distances to the neighboring probes $H_{ij}$. For each possible assignment
+  of $p_j$ to $s_i$, it computes a cost $c(s_i,p_j) := k_{n_i} H_{ij} / n$,
+  where $k_{n_i}$ are scaling coefficients ($k_1 = 1$, $k_2 = 0.8$, and $k_3 =
+  0.6$), and makes the assignment with minimum cost. With this algorithm, they
+  claimed to achieve up to 10\% reduction in border conflicts over the
+  TSP-based approach of Hannenhalli~{\it et~al}.\ \cite{HANNENHALLI02}.
+%  
 }
 
 A different strategy called the \emph{Epitaxial} placement algorithm
@@ -357,9 +368,9 @@ A different strategy called the \emph{Epitaxial} placement algorithm
 to insert probes in spots adjacent to already filled spots. Priority is given
 to spots with the largests numbers of filled neighbors. At each iteraction, it
 examines all non-filled spots~$s_i$ and finds a non-assigned probe $p_j$ with
-minimum sum of Hamming distances to the neighboring probes $H_{ij}$, employing
-a greedy heuristic to select the next spot to be filled.  A further 10\%
-reduction in border conflict over TSP~+~1-threading is claimed.
+minimum sum of Hamming distances $H_{ij}$ to the neighboring probes, employing
+a greedy heuristic to select the next spot.  A further 10\% reduction in
+border conflict over TSP~+~1-threading is claimed.
 
 \ignore{
 The major problem with the Epitaxial and the TSP-based algorithm is that they
@@ -423,7 +434,7 @@ re-embedding the probes without changing their locations.  The paper
 Single Probe Embedding (OSPE), for computing an optimum embedding of a probe
 on a spot $s$ with respect to the probes of neighboring spots, whose
 embeddings are considered fixed.  Originally, it was developed for border
-length minimization; below (Sect.~\ref{sec:ospe} we give a slightly more
+length minimization; below (Sect.~\ref{sec:ospe}) we give a slightly more
 general form that also applies to the conflict index measure.
 
 The OSPE algorithm is the basic operation of several post-placement
@@ -489,12 +500,12 @@ $M_{ij}$ denotes the cost of masking spot $s$ at step $j$ given that base $i$
 of probe $p$ has been synthesized previously.  Any unmasked neighbor $s'$
 generates a conflict on $s$ with cost $\omega(s,i)\cdot \delta(s,s',j)$;
 therefore the total cost is
-\[ M_{ij} = \sum_{s'}\, \omega(s,i) \delta(s,s',j). \]
+\[ M_{ij} = \sum_{s'}\, \omega(s,i) \cdot \delta(s,s',j). \]
 
 $U_{j}$ denotes the cost of unmasking spot $s$ at step $j$; it generates a
 conflict on each masked neighbor $s'$ with cost $\omega(s',j)\cdot
 \delta(s',s,j)$; therefore 
-\[ U_j = \sum_{s'}\, \omega(s',j) \delta(s',s,j). \]
+\[ U_j = \sum_{s'}\, \omega(s',j) \cdot \delta(s',s,j). \]
 
 The first column of $D$ is initialized as follows: $D[0,0] = 0$ and $D[i,0] =
 \infty$ for $0 < i \leq \ell$. The first row is $D[0,j] = D[0,j-1]+M_{0j}$ for
@@ -539,10 +550,10 @@ length minimization as well as conflict index minimization.
 \begin{minipage}{4.8in}
 
 \begin{tabbing}
-Output: \=									\kill
-Input:  \> chip dimension,							\\
-        \> set of probes $\mathcal{P} = \{p_{1}, p_{2}, ... p_{n}\}$, 		\\
-        \> maximum partitioning depth $t_{max}$					\\
+Output: \=                                  \kill
+Input:  \> chip dimension,                          \\
+        \> set of probes $\mathcal{P} = \{p_{1}, p_{2}, ... p_{n}\}$,       \\
+        \> maximum partitioning depth $t_{max}$                 \\
 Output: \> placement of the probes $p \in \mathcal{P}$ on the chip
 \end{tabbing}
 
@@ -605,12 +616,12 @@ a few minutes.
 \begin{minipage}{4.8in}
 
 \begin{tabbing}
-Output: \=									\kill
-Input:  \> current depth level $t$,						\\
-        \> maximum depth level $t_{max}$					\\
-        \> rectangular region $R$ of the chip,					\\
-        \> set of pivot candidates $\mathcal{Q}$,				\\
-        \> set of probes $\mathcal{P}$,						\\
+Output: \=                                  \kill
+Input:  \> current depth level $t$,                     \\
+        \> maximum depth level $t_{max}$                    \\
+        \> rectangular region $R$ of the chip,                  \\
+        \> set of pivot candidates $\mathcal{Q}$,               \\
+        \> set of probes $\mathcal{P}$,                     \\
 Output: \> placement of the probes $p \in \mathcal{P}$ and
            $q \in \mathcal{Q}$ on the region $R$ of the chip
 \end{tabbing}
@@ -832,7 +843,7 @@ de Carvalho Jr., S., Rahmann, S.:
 Modeling Microarray Layout as a Quadratic Assignment Problem.
 Submitted (2006).
 
-\bibitem[\c{C}ela, 1998]{CELA98} \c{C}ela,E. (1998) {\it The Quadratic Assignment Problem: Theory and Algorithms}. Kluwer, Massachessets, USA.
+\bibitem{CELA98} \c{C}ela,E. (1998) {\it The Quadratic Assignment Problem: Theory and Algorithms}. Kluwer, Massachessets, USA.
 
 
 \bibitem{CHASE76}

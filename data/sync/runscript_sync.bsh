@@ -1,0 +1,63 @@
+LOGFILE="runscript.log"
+ARRAYOPT="java -cp $ARRAYOPT_HOME/bin arrayopt.textui.ArrayOpt"
+
+probelen="25"
+
+echo "Start: `date`" >> ${LOGFILE}
+echo "Host: `hostname`" >> ${LOGFILE}
+
+for (( filenum = 1; filenum <= 5; filenum++))
+do
+	for dim in 100 200 300 500
+	do
+		let "nprobes = dim * dim"
+
+		#file="async/RAND-S-${dim}x${dim}-${nprobes}-25-74-0${filenum}_rand_rand"
+		#gunzip ${file}
+		
+		file="sync/RAND-S-${dim}x${dim}-${nprobes}-25-100-0${filenum}_rand_sync"
+		gunzip ${file}
+		
+		#for alg in "REPTX20K-BL" "PIVOTPART2+REPTX20K-BL" "PIVOTPART4+REPTX20K-BL" "PIVOTPART6+REPTX20K-BL"
+		for alg in "PIVOTPART2+GREEDY20K-BL" "PIVOTPART4+GREEDY20K-BL" "PIVOTPART6+GREEDY20K-BL"
+		do
+			optimiz="SEQREEMBED-BL-TOT"
+			#optimiz="NONE"
+			
+			#basename="async/RAND-S-${dim}x${dim}-${nprobes}-25-74-0${filenum}"
+			#input="${basename}_rand_rand"
+			#output="${basename}_${alg}_${optimiz}"
+			#param="simple nofix ${input} ${dim} ${dim} ${nprobes} ${probelen} AFFY ${alg} ${optimiz}"
+			#options="check calc-bl print"
+						
+			#echo "---------------------------" >> ${LOGFILE}
+			#top -b -d1 | head -2 >> ${LOGFILE}
+			#echo >> ${LOGFILE}
+			#echo ${input} ${alg} ${optimiz} >> ${LOGFILE}
+
+			#${ARRAYOPT} ${param} ${options} > ${output} 2>> ${LOGFILE}
+			#gzip ${output}
+			
+			basename="sync/RAND-S-${dim}x${dim}-${nprobes}-25-100-0${filenum}"
+			input="${basename}_rand_sync"
+			output="${basename}_${alg}_${optimiz}"
+			param="simple nofix ${input} ${dim} ${dim} ${nprobes} ${probelen} SYNC ${alg} ${optimiz}"
+			options="check calc-bl no-print"
+			
+			echo "---------------------------" >> ${LOGFILE}
+			top -b -d1 | head -2 >> ${LOGFILE}
+			echo >> ${LOGFILE}
+			echo ${input} ${alg} ${optimiz} >> ${LOGFILE}
+			
+			#${ARRAYOPT} ${param} ${options} > ${output} 2>> ${LOGFILE}
+			${ARRAYOPT} ${param} ${options} 2>> ${LOGFILE}
+			#gzip ${output}
+		done
+		
+		#file="async/RAND-S-${dim}x${dim}-${nprobes}-25-74-0${filenum}_rand_rand"
+		#gzip ${file}
+		
+		file="sync/RAND-S-${dim}x${dim}-${nprobes}-25-100-0${filenum}_rand_sync"
+		gzip ${file}
+	done
+done

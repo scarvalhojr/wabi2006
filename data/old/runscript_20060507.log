@@ -1,0 +1,158 @@
+Starting...
+Host: morpheus
+---------------------------
+last pid:  6095;  load averages:  0.20,  0.16,  0.15    20:34:03
+123 processes: 120 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-100x100-10000-25-100-01_rand_sync PIVOTPART2+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART2+REPTX20K-BL placement algorithm...
+Border length before placement: 742342
+Elapsed time (placement): 12.9777879 sec
+Border length before optimization: 406526
+Elapsed time (optimization): 4.2420884 sec
+Final border length: 391940
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6101;  load averages:  0.46,  0.22,  0.18    20:34:24
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-100x100-10000-25-100-01_rand_sync PIVOTPART4+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART4+REPTX20K-BL placement algorithm...
+Border length before placement: 742342
+Elapsed time (placement): 9.6833079 sec
+Border length before optimization: 427498
+Elapsed time (optimization): 4.2663652 sec
+Final border length: 407250
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6105;  load averages:  0.62,  0.27,  0.19    20:34:41
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-100x100-10000-25-100-01_rand_sync PIVOTPART6+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART6+REPTX20K-BL placement algorithm...
+Border length before placement: 742342
+Elapsed time (placement): 10.76263 sec
+Border length before optimization: 448986
+Elapsed time (optimization): 4.2458337 sec
+Final border length: 421358
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6121;  load averages:  0.78,  0.33,  0.21    20:35:02
+125 processes: 122 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-200x200-40000-25-100-01_rand_sync PIVOTPART2+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART2+REPTX20K-BL placement algorithm...
+Border length before placement: 2985922
+Elapsed time (placement): 152.1563582 sec
+Border length before optimization: 1538750
+Elapsed time (optimization): 12.6580494 sec
+Final border length: 1493478
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6151;  load averages:  1.09,  0.69,  0.38    20:38:01
+124 processes: 120 sleeping, 2 stopped, 2 on cpu
+
+sync/RAND-S-200x200-40000-25-100-01_rand_sync PIVOTPART4+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART4+REPTX20K-BL placement algorithm...
+Border length before placement: 2985922
+Elapsed time (placement): 60.6060806 sec
+Border length before optimization: 1601404
+Elapsed time (optimization): 16.8445591 sec
+Final border length: 1540034
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6161;  load averages:  1.04,  0.77,  0.44    20:39:28
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-200x200-40000-25-100-01_rand_sync PIVOTPART6+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART6+REPTX20K-BL placement algorithm...
+Border length before placement: 2985922
+Elapsed time (placement): 45.5327065 sec
+Border length before optimization: 1685326
+Elapsed time (optimization): 16.8419065 sec
+Final border length: 1602360
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6169;  load averages:  1.04,  0.83,  0.49    20:40:43
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-300x300-90000-25-100-01_rand_sync PIVOTPART2+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART2+REPTX20K-BL placement algorithm...
+Border length before placement: 6728294
+Elapsed time (placement): 687.8050384 sec
+Border length before optimization: 3339124
+Elapsed time (optimization): 28.4623891 sec
+Final border length: 3253796
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6234;  load averages:  1.08,  1.08,  0.84    20:53:00
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-300x300-90000-25-100-01_rand_sync PIVOTPART4+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART4+REPTX20K-BL placement algorithm...
+Border length before placement: 6728294
+Elapsed time (placement): 239.1789144 sec
+Border length before optimization: 3465676
+Elapsed time (optimization): 37.9433717 sec
+Final border length: 3351642
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6270;  load averages:  1.27,  1.14,  0.93    20:57:54
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-300x300-90000-25-100-01_rand_sync PIVOTPART6+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART6+REPTX20K-BL placement algorithm...
+Border length before placement: 6728294
+Elapsed time (placement): 129.3225053 sec
+Border length before optimization: 3618768
+Elapsed time (optimization): 38.058876 sec
+Final border length: 3469466
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6282;  load averages:  1.11,  1.11,  0.96    21:01:08
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-500x500-250000-25-100-01_rand_sync PIVOTPART2+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART2+REPTX20K-BL placement algorithm...
+Border length before placement: 18710432
+Elapsed time (placement): 3541.4124176 sec
+Border length before optimization: 8974788
+Elapsed time (optimization): 79.5752281 sec
+Final border length: 8769874
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6535;  load averages:  1.20,  1.12,  1.09    22:02:15
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-500x500-250000-25-100-01_rand_sync PIVOTPART4+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART4+REPTX20K-BL placement algorithm...
+Border length before placement: 18710432
+Elapsed time (placement): 1800.6785022 sec
+Border length before optimization: 9128778
+Elapsed time (optimization): 78.8106992 sec
+Final border length: 8884058
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6693;  load averages:  1.28,  1.22,  1.15    22:34:19
+124 processes: 121 sleeping, 2 stopped, 1 on cpu
+
+sync/RAND-S-500x500-250000-25-100-01_rand_sync PIVOTPART6+REPTX20K-BL SEQREEMBED-BL-TOT
+Running PIVOTPART6+REPTX20K-BL placement algorithm...
+Border length before placement: 18710432
+Elapsed time (placement): 692.984567 sec
+Border length before optimization: 9469334
+Elapsed time (optimization): 106.0345454 sec
+Final border length: 9150210
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.

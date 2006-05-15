@@ -1,0 +1,264 @@
+Start: Thu May 11 20:52:18 MEST 2006
+Host: morpheus
+Start: Thu May 11 20:52:25 MEST 2006
+Host: morpheus
+---------------------------
+last pid: 12746;  load averages:  5.68,  6.07,  6.76    20:52:26
+135 processes: 127 sleeping, 2 stopped, 6 on cpu
+
+sync/RAND-S-100x100-10000-25-100-01_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 742342
+Elapsed time (placement): 29.737464 sec
+Border length before optimization: 502478
+Elapsed time (optimization): 6.5640345 sec
+Final border length: 427678
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 12754;  load averages:  5.88,  6.07,  6.73    20:53:10
+136 processes: 128 sleeping, 2 stopped, 6 on cpu
+
+sync/RAND-S-200x200-40000-25-100-01_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 2985922
+Elapsed time (placement): 600.9559482 sec
+Border length before optimization: 1927696
+Elapsed time (optimization): 50.8523596 sec
+Final border length: 1664986
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 13668;  load averages: 15.12, 13.72, 10.58    21:04:23
+259 processes: 242 sleeping, 8 running, 2 stopped, 7 on cpu
+
+sync/RAND-S-300x300-90000-25-100-01_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 6728294
+Elapsed time (placement): 1809.0181055 sec
+Border length before optimization: 4295264
+Elapsed time (optimization): 100.1516249 sec
+Final border length: 3723426
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 14035;  load averages: 14.14, 14.18, 14.03    21:36:59
+225 processes: 209 sleeping, 7 running, 2 stopped, 7 on cpu
+
+sync/RAND-S-500x500-250000-25-100-01_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 18710432
+Elapsed time (placement): 4355.4882281 sec
+Border length before optimization: 11885110
+Elapsed time (optimization): 230.4496604 sec
+Final border length: 10321476
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 14861;  load averages: 11.12, 11.12, 11.36    22:54:52
+202 processes: 189 sleeping, 3 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-100x100-10000-25-100-02_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 743122
+Elapsed time (placement): 46.6399093 sec
+Border length before optimization: 502878
+Elapsed time (optimization): 9.4843715 sec
+Final border length: 427468
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 14870;  load averages: 11.10, 11.11, 11.34    22:55:55
+202 processes: 189 sleeping, 3 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-200x200-40000-25-100-02_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 2985008
+Elapsed time (placement): 494.750844 sec
+Border length before optimization: 1926234
+Elapsed time (optimization): 31.6642034 sec
+Final border length: 1663792
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 15203;  load averages: 10.23, 10.73, 11.09    23:05:02
+197 processes: 185 sleeping, 2 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-300x300-90000-25-100-02_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 6726278
+Elapsed time (placement): 1223.2374513 sec
+Border length before optimization: 4295692
+Elapsed time (optimization): 71.8773839 sec
+Final border length: 3722524
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 15390;  load averages: 10.08, 10.08, 10.31    23:27:15
+182 processes: 170 sleeping, 3 running, 2 stopped, 7 on cpu
+
+sync/RAND-S-500x500-250000-25-100-02_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 18714314
+Elapsed time (placement): 3543.3813819 sec
+Border length before optimization: 11883374
+Elapsed time (optimization): 294.228493 sec
+Final border length: 10319696
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 17260;  load averages: 14.09, 14.24, 12.97    00:32:54
+225 processes: 209 sleeping, 6 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-100x100-10000-25-100-03_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 742162
+Elapsed time (placement): 52.7340322 sec
+Border length before optimization: 502766
+Elapsed time (optimization): 12.4352427 sec
+Final border length: 428006
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 17268;  load averages: 14.10, 14.21, 13.06    00:34:07
+225 processes: 209 sleeping, 6 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-200x200-40000-25-100-03_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 2983808
+Elapsed time (placement): 659.3882026 sec
+Border length before optimization: 1927850
+Elapsed time (optimization): 46.0792013 sec
+Final border length: 1665118
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 17363;  load averages: 14.12, 14.12, 13.64    00:46:15
+227 processes: 211 sleeping, 6 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-300x300-90000-25-100-03_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 6729384
+Elapsed time (placement): 1622.6670146 sec
+Border length before optimization: 4295522
+Elapsed time (optimization): 95.7627393 sec
+Final border length: 3722116
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 17601;  load averages: 13.12, 13.11, 13.29    01:15:36
+214 processes: 199 sleeping, 5 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-500x500-250000-25-100-03_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 18713712
+Elapsed time (placement): 4365.6684379 sec
+Border length before optimization: 11883422
+Elapsed time (optimization): 205.8887565 sec
+Final border length: 10318572
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 18815;  load averages: 10.17, 10.58, 11.08    02:33:08
+192 processes: 180 sleeping, 3 running, 2 stopped, 7 on cpu
+
+sync/RAND-S-100x100-10000-25-100-04_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 741492
+Elapsed time (placement): 39.1085433 sec
+Border length before optimization: 502640
+Elapsed time (optimization): 8.8277291 sec
+Final border length: 427018
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 18839;  load averages: 10.10, 10.49, 11.02    02:34:03
+193 processes: 181 sleeping, 2 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-200x200-40000-25-100-04_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 2985202
+Elapsed time (placement): 443.4060094 sec
+Border length before optimization: 1927106
+Elapsed time (optimization): 32.1599451 sec
+Final border length: 1662428
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 18993;  load averages:  9.19,  9.77, 10.47    02:42:14
+182 processes: 171 sleeping, 1 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-300x300-90000-25-100-04_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 6727480
+Elapsed time (placement): 992.6062436 sec
+Border length before optimization: 4296814
+Elapsed time (optimization): 57.4487385 sec
+Final border length: 3723986
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 19260;  load averages:  8.06,  8.17,  8.94    03:00:12
+171 processes: 161 sleeping, 2 stopped, 8 on cpu
+
+sync/RAND-S-500x500-250000-25-100-04_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 18716170
+Elapsed time (placement): 3405.1631105 sec
+Border length before optimization: 11883030
+Elapsed time (optimization): 234.3538916 sec
+Final border length: 10322710
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 20934;  load averages: 11.25, 11.97, 11.86    04:02:10
+202 processes: 189 sleeping, 3 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-100x100-10000-25-100-05_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 742700
+Elapsed time (placement): 39.4152115 sec
+Border length before optimization: 502870
+Elapsed time (optimization): 9.8014603 sec
+Final border length: 427252
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 20941;  load averages: 11.16, 11.82, 11.82    04:03:06
+202 processes: 189 sleeping, 3 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-200x200-40000-25-100-05_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 2986400
+Elapsed time (placement): 518.5488357 sec
+Border length before optimization: 1926722
+Elapsed time (optimization): 36.2483127 sec
+Final border length: 1664112
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 20988;  load averages: 11.09, 11.19, 11.47    04:12:41
+202 processes: 189 sleeping, 3 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-300x300-90000-25-100-05_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 6724698
+Elapsed time (placement): 1338.971861 sec
+Border length before optimization: 4296554
+Elapsed time (optimization): 79.5325574 sec
+Final border length: 3724170
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 21179;  load averages: 11.16, 11.09, 11.16    04:36:59
+204 processes: 191 sleeping, 3 running, 2 stopped, 8 on cpu
+
+sync/RAND-S-500x500-250000-25-100-05_rand_sync REPTX20K-BL SEQREEMBED-BL-TOT
+Running REPTX20K-BL placement algorithm...
+Border length before placement: 18714182
+Elapsed time (placement): 3698.7072876 sec
+Border length before optimization: 11882750
+Elapsed time (optimization): 164.8044075 sec
+Final border length: 10321424
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.

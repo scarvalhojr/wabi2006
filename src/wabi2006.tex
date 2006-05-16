@@ -15,7 +15,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Improving Oligonucleotide Microarray Layout Algorithms: Pivot Partitioning}
+\title{Improving the Layout of Oligonucleotide Microarrays: Pivot Partitioning}
 \titlerunning{Improving Microarray Layout: Pivot Partitioning}
 
 \author{S\'ergio A. de Carvalho Jr.\inst{1,}\inst{2}\inst{,3} \and Sven Rahmann\inst{1,}\inst{3}}
@@ -47,8 +47,10 @@ micromirror arrays. Because of the natural properties of light and the
 ever shrinking feature sizes, the arrangement of the probes on the
 chip and the order in which their nucleotides are synthesized play an
 important role on the quality of the final product. We propose a new
-model called \emph{conflict index} for evaluating microarray layouts.
-%TODO XXX
+model called \emph{conflict index} for evaluating the layout of microarrays.
+We also present a new partitioning algorithm, called Pivot Partitioning,
+that improves the quality of layouts, according to existing
+measures, by over 6\% when compared to the best known algorithms.
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -686,30 +688,37 @@ This is done to help the placement algorithm by improving the ``alignment'' of a
 embeddings in the region.
 
 % ==============================================================================
-\section{Results}
+\section{Results and Discussion}
 % ==============================================================================
 \label{sec:results}
 
-We now present the results of running our Pivot Partitioning algorithm on
+We now present the results of running our Pivot Partitioning (PP) algorithm on
 random chips. Table~\ref{tab:pp_bl} shows the normalized border length (total border
-length divided by the number of probes) using Row-epitaxial (for the placement) and
-the Sequential post-placement optimization.
+length divided by the number of probes) using our own implementations of Row-epitaxial
+(for the placement) as well as the Sequential post-placement optimization.
 
-Table~\ref{tab:pp_ci} shows the average conflict index using a version of
-Row-epitaxial for conflict index minimization, which selects, for every
-spot $s$, the probe minimizing $\mathcal{C}(s)$. For the post-placement optimization,
+Our results
+show that, in the first level of partitioning, PP allows for a reduction in border length
+by as much as 16\% when compared to running the Row-epitaxial alone (from 41.27 to
+34.69 on $500\times 500$ chips). The total border length for $t_{max}=2$ on
+$500\times 500$ is 8\,673\,722. This represents a reduction of as much as 6.8\% over
+the layout produced by the Centroid-based Quadrisection (CQ) similarly combined with
+Row-epitaxial and followed by the Sequential optimization, which produced a layout
+with a border length of 9\,307\,510 as reported in~\cite{KAHNG03B}. In the next levels
+of partitioning, we observe a small increase in border length but, on the other hand,
+we also report a significant reduction in running times.
+
+Table~\ref{tab:pp_ci} shows similar results with the average conflict index. For these
+experiments, we use a version of Row-epitaxial implemented for conflict index
+minimization, which fills every spot $s$ with a probe minimizing $\mathcal{C}(s)$.
+For the post-placement optimization,
 we use the Sequential algorithm with the OSPE for conflict index minimization
-(Sect.\,\ref{sec:ospe}). Computing the conflict index of a spot for every candidate
-probes is not as straight forward as computing the Hamming distance betweem the probe
+as described in Sect.\,\ref{sec:ospe}. Computing the conflict index of a spot for
+every probe candidate is not as straight forward as computing the Hamming distance
+betweem a probe
 and its neighbors, and thus both versions of the Row-epitaxial and the Sequential
-optimization for conflict index minimization are significantly slower than the
-versions for border length minimization. For this reason, we set limit the number
-of probes considered by the Row-epitaxial to $Q = 2\,000$.
-
-Our results show that the partitioning can improve the placement by assigning similar
-probes to the same sub-region of the chip. With higher partitioning depths, it can
-also reduce the running times significantly, at the cost of a small increase in
-conflicts.
+optimization for conflict index minimization are significantly slower. For this reason,
+we set a limit on the number of probes considered by the Row-epitaxial to $Q = 2\,000$.
 
 \begin{table}[t]
 \caption{
@@ -752,10 +761,10 @@ Dim & & \multicolumn{1}{c}{Cost} & \multicolumn{1}{c}{Time} & & \multicolumn{1}{
 \noalign{\smallskip}
 \cline{1-1} \cline{3-4} \cline{6-7} \cline{9-10} \cline{12-13}
 \noalign{\smallskip}
-100 & \ \ & \ 43.61 & \  18 & \ \ & \ 39.12 & \  19 & \ \ & \ 40.72 & \  12 & \ \ & \ 42.11 & \  13 \\
-200 & \ \ & \ 43.76 & \  31 & \ \ & \ 37.77 & \  78 & \ \ & \ 38.52 & \  70 & \ \ & \ 40.00 & \  55 \\
-300 & \ \ & \ 43.85 & \ 146 & \ \ & \ 36.90 & \ 196 & \ \ & \ 37.47 & \ 205 & \ \ & \ 38.54 & \ 160 \\
-500 & \ \ & \ 43.86 & \ 410 & \ \ & \ 35.71 & \ 567 & \ \ & \ 36.17 & \ 615 & \ \ & \ 36.79 & \ 621 \\
+100 & \ \ & \ 514.49 & \     45 & \ \ & \ 453.67 & \     37 & \ \ & \ 467.78 & \     19 & \ \ & \ 475.44 & \     15 \\
+200 & \ \ & \ 517.07 & \    192 & \ \ & \ 466.22 & \    215 & \ \ & \ 452.41 & \    166 & \ \ & \ 462.55 & \     99 \\
+300 & \ \ & \ 518.51 & \    438 & \ \ & \ 475.84 & \    524 & \ \ & \ 452.00 & \    466 & \ \ & \ 448.17 & \    336 \\
+500 & \ \ & \ 000.00 & \ 1\,471 & \ \ & \ 000.00 & \ 1\,530 & \ \ & \ 000.00 & \ 1\,472 & \ \ & \ 445.43 & \ 1\,295 \\
 \noalign{\smallskip}
 \hline
 \end{tabular}}
@@ -814,15 +823,22 @@ sequence of length 74. Table~\ref{tab:pp_affy_bl} shows the normalized border le
 the average conflict index.
 } %% results on Affy chips
 
-Table~\ref{tab:pp_x_cq_bl} compares the performance of the Pivot Partitioning (PP) with the
-Centroid-based Quadrisection (CQ) in terms of border length, with equivalent partitioning
-depths (two levels of the PP are equivalent to one level on the CQ). The results
-show that the PP produces layouts with less conflicts than the CQ except for the higher
+We also compare the performance of the Pivot Partitioning (PP) with the
+Centroid-based Quadrisection (CQ). Table~\ref{tab:pp_x_cq_bl} shows the total border
+length of layouts produced by CQ as reported in ~\cite{KAHNG03B}. We run the PP
+on similar input and report the results with equivalent partitioning depths
+(two levels of the PP are equivalent to one level on the CQ). The results are shown
+as a percentage of reduction in border length compared to the CQ. For instance,
+on $500\times 500$ chips, the PP produces layouts with 8.95\% less conflicts than
+the CQ, on average.
+
+Our results
+show that the PP produces layouts with less conflicts than the CQ except for higher
 partitioning depths on the smaller chips. We suspect that this disadvantage is
 due to the ``borrowing heuristic'' used by the CQ that permits, during the placement,
 borrowing probes from neighboring partitions in order to maintain a high number
-of probes that can be considered for filling the last spots of a quadrant. We are planning
-to implement a similar strategy in our Pivot Partitioning in order to improve
+of probes that can be considered for filling the last spots of a quadrant. We are
+planning to investigate a similar strategy on the Pivot Partitioning that could improve
 the quality of our solutions.
 
 We believe that the main advantages of our approach over the CQ algorithm are:

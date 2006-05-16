@@ -8,9 +8,12 @@ PDF_FILE = ${OUTPUT_DIR}/${BASENAME}.pdf
 
 .PHONY: ${PDF_FILE}
 
-dvi: ${DVI_FILE}
+dvi: ${MAINTEX}
+	latex ${INPUT}
+	latex ${INPUT}
 
-pdf: ${PDF_FILE}
+pdf: dvi
+	dvipdfm -o ${BASENAME}.pdf  ${BASENAME}
 
 ${DVI_FILE}: ${OUTPUT_DIR}
 	latex ${INPUT}

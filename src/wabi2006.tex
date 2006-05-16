@@ -539,7 +539,7 @@ only a limited number of embeddings.
 
 We use the probes with fewer embeddings, that we call ``pivots'', to drive the
 partitioning of the probe set and to re-embed the probes just before their
-placement (as a partitioning algorithm, the PP also works in combination with
+placement (as a partitioning algorithm, PP also works in combination with
 another placement algorithm). Also, we designed our algorithm to work for border
 length minimization as well as conflict index minimization.
 
@@ -718,7 +718,7 @@ every probe candidate is not as straight forward as computing the Hamming distan
 between a probe
 and its neighbors, and thus both versions of the Row-epitaxial and the Sequential
 optimization for conflict index minimization are significantly slower. For this reason,
-we set a limit on the number of probes considered by the Row-epitaxial to $Q = 2\,000$.
+we set the limit on the number of probes considered by the Row-epitaxial to $Q = 2\,000$.
 
 \begin{table}[t]
 \caption{
@@ -772,8 +772,8 @@ Dim & & \multicolumn{1}{c}{Cost} & \multicolumn{1}{c}{Time} & & \multicolumn{1}{
 
 \ignore{
 The results shown on table Table~\ref{tab:pp_x_cq_bl} are for chips with probes
-synchronously embedded. For chips with asynchronous embeddings, the PP is likely
-to produce even better results when compared to the CQ. This is because our
+synchronously embedded. For chips with asynchronous embeddings, PP is likely
+to produce even better results when compared to CQ. This is because our
 pivots are selected from the probes having fewer embeddings, which are likely
 to be better representatives.
 } %% we would have to show data on synchronous chips to state that
@@ -785,10 +785,10 @@ are synchronously embedded in a deposition sequence of length 100. The partition
 depths varies from $L=1$ to $L=3$ for the CQ algorithm and, equivalently, from
 $t_{max}=2$ to $t_{max}=6$ for PP. Both partitionings use Row-epitaxial for the placement
 (with $Q = 20\,000$) and are followed by the Sequential post-placement optimization.
-The data shows the total border length of chips produced by the CQ
-(extracted from~\cite{KAHNG03B}), and the results of using the PP on
-similar input, as percentage of the reduction in border length compared to the CQ. For
-instance, the PP generates on average 8.95\% less border length on $500\times 500$ chips
+The data shows the total border length of chips produced by CQ
+(extracted from~\cite{KAHNG03B}), and the results of using PP on
+similar input, as percentage of the reduction in border length compared to CQ. For
+instance, PP generates on average 8.95\% less border length on $500\times 500$ chips
 with $t_{max}=2$.}
 \centerline{
 \begin{tabular}{clrrlrrlrr}
@@ -823,22 +823,22 @@ sequence of length 74. Table~\ref{tab:pp_affy_bl} shows the normalized border le
 the average conflict index.
 } %% results on Affy chips
 
-We also compare the performance of the Pivot Partitioning (PP) with the
+We also compare the performance of Pivot Partitioning with the
 Centroid-based Quadrisection (CQ). Table~\ref{tab:pp_x_cq_bl} shows the total border
-length of layouts produced by CQ as reported in ~\cite{KAHNG03B}. We run the PP
+length of layouts produced by CQ as reported in ~\cite{KAHNG03B}. We run PP
 on similar input and report the results with equivalent partitioning depths
-(two levels of the PP are equivalent to one level on the CQ). The results are shown
-as a percentage of reduction in border length compared to the CQ. For instance,
-on $500\times 500$ chips, the PP produces layouts with 8.95\% less conflicts than
-the CQ, on average.
+(two levels of PP are equivalent to one level on CQ). The results are shown
+as a percentage of reduction in border length compared to CQ. For instance,
+on $500\times 500$ chips, PP produces layouts with 8.95\% less conflicts than
+CQ, on average.
 
 Our results
-show that the PP produces layouts with less conflicts than the CQ except for higher
+show that PP produces layouts with less conflicts than CQ except for higher
 partitioning depths on the smaller chips. We suspect that this disadvantage is
-due to the ``borrowing heuristic'' used by the CQ that permits, during the placement,
+due to the ``borrowing heuristic'' used by CQ that permits, during the placement,
 borrowing probes from neighboring partitions in order to maintain a high number
 of probes that can be considered for filling the last spots of a quadrant. We are
-planning to investigate a similar strategy on the Pivot Partitioning that could improve
+planning to investigate a similar strategy on Pivot Partitioning that could improve
 the quality of our solutions.
 
 \paragraph{Summary}

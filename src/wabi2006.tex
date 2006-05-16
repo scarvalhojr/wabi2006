@@ -764,7 +764,7 @@ Dim & & \multicolumn{1}{c}{Cost} & \multicolumn{1}{c}{Time} & & \multicolumn{1}{
 100 & \ \ & \ 514.49 & \     45 & \ \ & \ 453.67 & \     37 & \ \ & \ 467.78 & \     19 & \ \ & \ 475.44 & \     15 \\
 200 & \ \ & \ 517.07 & \    192 & \ \ & \ 466.22 & \    215 & \ \ & \ 452.41 & \    166 & \ \ & \ 462.55 & \     99 \\
 300 & \ \ & \ 518.51 & \    438 & \ \ & \ 475.84 & \    524 & \ \ & \ 452.00 & \    466 & \ \ & \ 448.17 & \    336 \\
-500 & \ \ & \ 000.00 & \ 1\,471 & \ \ & \ 000.00 & \ 1\,530 & \ \ & \ 000.00 & \ 1\,472 & \ \ & \ 445.43 & \ 1\,295 \\
+500 & \ \ & \ 517.50 & \ 1\,471 & \ \ & \ 481.36 & \ 1\,530 & \ \ & \ 462.33 & \ 1\,472 & \ \ & \ 445.43 & \ 1\,295 \\
 \noalign{\smallskip}
 \hline
 \end{tabular}}
@@ -841,14 +841,12 @@ of probes that can be considered for filling the last spots of a quadrant. We ar
 planning to investigate a similar strategy on the Pivot Partitioning that could improve
 the quality of our solutions.
 
-We believe that the main advantages of our approach over the CQ algorithm are:
-%%
-\begin{itemize}
-\item faster and better selection of pivots used to drive
-the assignment of probes to sub-regions;
-\item improved assignment of probes to regions by considering all valid embeddings
-of a probe;
-\end{itemize}
+\paragraph{Summary}
+We have presented a new partitioning strategy that for the first time combines
+the partitioning the chip with embedding of the probes. The main advantages of
+our approach over previous methods are: faster and better selection of pivots
+used to drive the assignment of probes to sub-regions; and improved assignment
+of probes to regions by considering all valid embeddings of a probe.
 
 \paragraph{Acknowledgments.}We thank Ion Mandoiu, Xu Xu and Sherief Reda for
 providing an implementation of their algorithms.

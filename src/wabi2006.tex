@@ -367,7 +367,7 @@ suggests a different threading of the TSP tour on the chip, called
 A different strategy called \emph{Epitaxial} placement
 \cite{KAHNG02} places a random probe in the center of the array and continues
 to insert probes in spots adjacent to already filled spots. Priority is given
-to spots with the largests numbers of filled neighbors. At each iteraction, it
+to spots with the largest numbers of filled neighbors. At each iteraction, it
 examines all non-filled spots~$s_i$ and finds a non-assigned probe $p_j$ with
 minimum sum of Hamming distances $H_{ij}$ to the neighboring probes, employing
 a greedy heuristic to select the next spot.  A further 10\% reduction in
@@ -715,7 +715,7 @@ For the post-placement optimization,
 we use the Sequential algorithm with the OSPE for conflict index minimization
 as described in Sect.\,\ref{sec:ospe}. Computing the conflict index of a spot for
 every probe candidate is not as straight forward as computing the Hamming distance
-betweem a probe
+between a probe
 and its neighbors, and thus both versions of the Row-epitaxial and the Sequential
 optimization for conflict index minimization are significantly slower. For this reason,
 we set a limit on the number of probes considered by the Row-epitaxial to $Q = 2\,000$.
@@ -724,7 +724,7 @@ we set a limit on the number of probes considered by the Row-epitaxial to $Q = 2
 \caption{
 Normalized border length of layouts produced by Pivot Partitioning on random chips
 with dimensions ranging from $100\times 100$ to $500\times 500$, with probes
-synchronously embeded in a deposition sequence of length 100. Partitioning
+synchronously embedded in a deposition sequence of length 100. Partitioning
 depths ranges from $t_{max}=0$ (no partitioning) to $t_{max}=6$. Row-epitaxial
 is used for the placement (with $Q = 20\,000$), followed by the Sequential
 post-placement optimization. Running times are reported in seconds, and do not
@@ -750,7 +750,7 @@ Dim & & \multicolumn{1}{c}{Cost} & \multicolumn{1}{c}{Time} & & \multicolumn{1}{
 \begin{table}[t]
 \caption{
 Average conflict index of layouts produced by Pivot Partitioning on random chips
-of synchronous embededdings. We use versions of the Row-epitaxial (with $Q = 2\,000$)
+of synchronous embeddings. We use versions of the Row-epitaxial (with $Q = 2\,000$)
 and the Sequential algorithms for conflict index minimization.}
 \centerline{
 \begin{tabular}{clrrlrrlrrlrr}
@@ -781,7 +781,7 @@ to be better representatives.
 \begin{table}
 \caption{Comparison between Pivot Partitioning (PP) and Centroid-based Quadrisection (CQ)
 on random chips with dimensions ranging from $100\times 100$ to $500\times 500$, whose probes
-are synchronously embeded in a deposition sequence of length 100. The partitioning
+are synchronously embedded in a deposition sequence of length 100. The partitioning
 depths varies from $L=1$ to $L=3$ for the CQ algorithm and, equivalently, from
 $t_{max}=2$ to $t_{max}=6$ for PP. Both partitionings use Row-epitaxial for the placement
 (with $Q = 20\,000$) and are followed by the Sequential post-placement optimization.
@@ -816,7 +816,7 @@ and 96 Gb of RAM under similar load balances.}
 
 \ignore{
 Tables~\ref{tab:pp_affy_bl} and~\ref{tab:pp_affy_ci} shows the results of running PP on chips
-containing probe sets of exisiting Affymetrix GeneChip arrays -- E.Coli 2.0 Genome (EC2), Porcine
+containing probe sets of existing Affymetrix GeneChip arrays -- E.Coli 2.0 Genome (EC2), Porcine
 Genome (POR) and Wheat Genome (WHT) -- whose probes are synchronously embedded in a deposition
 sequence of length 74. Table~\ref{tab:pp_affy_bl} shows the normalized border length
 (total border length divided by the number of probes) while Table~\ref{tab:pp_affy_ci} shows
@@ -878,7 +878,7 @@ Subsequence numbers and logarithmic concavity.
 \ignore{
 \bibitem{FELDMAN93}
 Feldman, W., Pevzner, P.:
-Gray code masks for sequencing by hibridization.
+Gray code masks for sequencing by hybridization.
 {\it Genomics} (1994) {\bf 23} 233--235.
 }
 

@@ -1,0 +1,59 @@
+LOGFILE="runscript.log"
+ARRAYOPT="java -cp $ARRAYOPT_HOME/bin arrayopt.textui.ArrayOpt"
+
+probelen="25"
+
+echo "Start: `date`" >> ${LOGFILE}
+echo "Host: `hostname`" >> ${LOGFILE}
+
+for (( run = 1; run <= 5; run++))
+do
+	for file in "EC2-S" "POR-S" "WH-S"
+	do
+		if [ "$file" == "EC2-S" ]; then
+			dim=336
+			nprobes=112488
+		elif [ "$file" == "POR-S" ]; then
+			dim=516
+			nprobes=265635	
+		elif [ "$file" == "WH-S" ]; then
+			dim=822
+			nprobes=674353
+		fi
+
+		for alg in "GREEDY2K" "PIVOTPART2+GREEDY2K" "PIVOTPART4+GREEDY2K" "PIVOTPART6+GREEDY2K" "PIVOTPART8+GREEDY2K"
+		do
+			algo="${alg}-BL"
+			optimiz="SEQREEMBED-BL-TOT"
+			basename="${file}-${dim}x${dim}-${nprobes}-25-74"
+			input="${basename}_seq_plembed"
+			output="${basename}_${algo}_${optimiz}"
+			param="simple nofix ${input} ${dim} ${dim} ${nprobes} ${probelen} AFFY ${algo} ${optimiz}"
+			options="check calc-bl no-print"
+			
+			echo "---------------------------" >> ${LOGFILE}
+			top -b -d1 | head -2 >> ${LOGFILE}
+			echo >> ${LOGFILE}
+			echo ${input} ${alg} ${optimiz} >> ${LOGFILE}
+
+			#${ARRAYOPT} ${param} ${options} > ${output} 2>> ${LOGFILE}
+			${ARRAYOPT} ${param} ${options} 2>> ${LOGFILE}
+			
+			algo="${alg}-CI"
+			optimiz="SEQREEMBED-CI-TOT"
+			basename="${file}-${dim}x${dim}-${nprobes}-25-74"
+			input="${basename}_seq_plembed"
+			output="${basename}_${algo}_${optimiz}"
+			param="simple nofix ${input} ${dim} ${dim} ${nprobes} ${probelen} AFFY ${algo} ${optimiz}"
+			options="check calc-ci no-print"
+			
+			echo "---------------------------" >> ${LOGFILE}
+			top -b -d1 | head -2 >> ${LOGFILE}
+			echo >> ${LOGFILE}
+			echo ${input} ${alg} ${optimiz} >> ${LOGFILE}
+
+			#${ARRAYOPT} ${param} ${options} > ${output} 2>> ${LOGFILE}
+			${ARRAYOPT} ${param} ${options} 2>> ${LOGFILE}
+		done
+	done
+done

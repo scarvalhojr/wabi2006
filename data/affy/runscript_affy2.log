@@ -1,0 +1,48 @@
+Start: Mon May 15 03:57:08 MEST 2006
+Host: morpheus
+---------------------------
+last pid:  6884;  load averages:  3.07,  3.56,  3.89    03:57:08
+136 processes: 130 sleeping, 2 stopped, 4 on cpu
+
+WH-S-822x822-674353-25-74_seq_plembed GREEDY2K SEQREEMBED-BL-TOT
+Running GREEDY2K-BL placement algorithm...
+Border length before placement: 40276788
+Elapsed time (placement): 917.9947067 sec
+Border length before optimization: 22648532
+Elapsed time (optimization): 100.4320592 sec
+Final border length: 22368016
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  6998;  load averages:  4.09,  4.11,  4.06    04:14:38
+134 processes: 128 sleeping, 2 stopped, 4 on cpu
+
+WH-S-822x822-674353-25-74_seq_plembed GREEDY2K SEQREEMBED-CI-TOT
+Running GREEDY2K-CI placement algorithm...
+Conflict index before placement: 738.8783412658238
+Elapsed time (placement): 2637.5711062 sec
+Conflict index before optimization: 654.1626659758867
+Elapsed time (optimization): 13866.7637067 sec
+Final conflict index: 582.4873034757668
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  7959;  load averages:  3.06,  3.06,  3.16    08:57:30
+133 processes: 128 sleeping, 2 stopped, 3 on cpu
+
+WH-S-822x822-674353-25-74_seq_plembed PIVOTPART2+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART2+GREEDY2K-BL placement algorithm...
+Border length before placement: 40276788
+Elapsed time (placement): 5586.0485792 sec
+Border length before optimization: 22824852
+Elapsed time (optimization): 147.7903263 sec
+Final border length: 22383884
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8313;  load averages:  3.04,  3.09,  3.09    10:33:33
+128 processes: 123 sleeping, 2 stopped, 3 on cpu
+
+WH-S-822x822-674353-25-74_seq_plembed PIVOTPART2+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART2+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 738.8783412658238

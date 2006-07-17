@@ -1,0 +1,50 @@
+Start: Mon May 15 04:03:56 MEST 2006
+Host: marvin
+---------------------------
+last pid:  9069;  load averages:  1.12,  1.17,  1.14    04:03:56
+228 processes: 222 sleeping, 4 zombie, 2 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed GREEDY2K SEQREEMBED-BL-TOT
+Running GREEDY2K-BL placement algorithm...
+Border length before placement: 15926428
+Elapsed time (placement): 423.7344664 sec
+Border length before optimization: 9088234
+Elapsed time (optimization): 48.1283454 sec
+Final border length: 8977752
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  9141;  load averages:  2.14,  2.00,  1.59    04:12:07
+226 processes: 220 sleeping, 4 zombie, 2 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed GREEDY2K SEQREEMBED-CI-TOT
+Running GREEDY2K-CI placement algorithm...
+Conflict index before placement: 732.5347777066112
+Elapsed time (placement): 1224.8756624 sec
+Conflict index before optimization: 644.6893220335984
+Elapsed time (optimization): 5492.7499864 sec
+Final conflict index: 578.1909797799342
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  9545;  load averages:  2.07,  2.08,  2.10    06:07:51
+226 processes: 220 sleeping, 4 zombie, 2 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART2+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART2+GREEDY2K-BL placement algorithm...
+Border length before placement: 15926428
+Elapsed time (placement): 1019.0223091 sec
+Border length before optimization: 9198466
+Elapsed time (optimization): 69.3089321 sec
+Final border length: 9016918
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  9639;  load averages:  2.07,  2.11,  2.12    06:26:17
+226 processes: 220 sleeping, 4 zombie, 2 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART2+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART2+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 732.5347777066112
+Elapsed time (placement): 15199.3322816 sec
+Conflict index before optimization: 529.4152763646953

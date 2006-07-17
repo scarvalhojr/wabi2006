@@ -1,0 +1,282 @@
+Start: Sun May 14 19:48:46 MEST 2006
+Host: tank
+---------------------------
+last pid:  7551;  load averages:  0.07,  0.44,  0.79    19:48:46
+67 processes:  66 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed GREEDY2K SEQREEMBED-BL-TOT
+Running GREEDY2K-BL placement algorithm...
+Border length before placement: 4949470
+Elapsed time (placement): 123.2167994 sec
+Border length before optimization: 3994150
+Elapsed time (optimization): 16.5053343 sec
+Final border length: 3940644
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  7565;  load averages:  0.94,  0.68,  0.83    19:51:10
+68 processes:  67 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed GREEDY2K SEQREEMBED-CI-TOT
+Running GREEDY2K-CI placement algorithm...
+Conflict index before placement: 667.8222943108289
+Elapsed time (placement): 402.4248314 sec
+Conflict index before optimization: 642.8326154326523
+Elapsed time (optimization): 2286.9142669 sec
+Final conflict index: 576.06772629597
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  7814;  load averages:  1.04,  1.04,  1.04    20:37:22
+68 processes:  67 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed PIVOTPART2+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART2+GREEDY2K-BL placement algorithm...
+Border length before placement: 4949470
+Elapsed time (placement): 216.9414233 sec
+Border length before optimization: 4057070
+Elapsed time (optimization): 24.1714153 sec
+Final border length: 3966116
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  7840;  load averages:  1.06,  1.05,  1.04    20:41:28
+68 processes:  67 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed PIVOTPART2+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART2+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 667.8222943108289
+Elapsed time (placement): 2478.3229147 sec
+Conflict index before optimization: 517.5988371394495
+Elapsed time (optimization): 1531.7049985 sec
+Final conflict index: 498.1703716262322
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8189;  load averages:  1.05,  1.05,  1.05    21:49:40
+68 processes:  67 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed PIVOTPART4+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART4+GREEDY2K-BL placement algorithm...
+Border length before placement: 4949470
+Elapsed time (placement): 165.527494 sec
+Border length before optimization: 4134384
+Elapsed time (optimization): 23.9375553 sec
+Final border length: 4033514
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8206;  load averages:  1.05,  1.04,  1.05    21:52:54
+68 processes:  67 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed PIVOTPART4+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART4+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 667.8222943108289
+Elapsed time (placement): 931.3019549 sec
+Conflict index before optimization: 484.05068859279277
+Elapsed time (optimization): 1152.4535172 sec
+Final conflict index: 466.5325318208086
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8403;  load averages:  1.01,  1.02,  1.04    22:29:00
+68 processes:  67 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed PIVOTPART6+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART6+GREEDY2K-BL placement algorithm...
+Border length before placement: 4949470
+Elapsed time (placement): 122.6364666 sec
+Border length before optimization: 4253660
+Elapsed time (optimization): 24.2009135 sec
+Final border length: 4130696
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8416;  load averages:  1.03,  1.03,  1.04    22:31:31
+68 processes:  66 sleeping, 2 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed PIVOTPART6+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART6+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 667.8222943108289
+Elapsed time (placement): 421.0817264 sec
+Conflict index before optimization: 477.1869554622798
+Elapsed time (optimization): 1527.465569 sec
+Final conflict index: 460.4152691930217
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8610;  load averages:  1.00,  1.02,  1.04    23:05:22
+68 processes:  67 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed PIVOTPART8+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART8+GREEDY2K-BL placement algorithm...
+Border length before placement: 4949470
+Elapsed time (placement): 95.7020357 sec
+Border length before optimization: 4437224
+Elapsed time (optimization): 32.5835172 sec
+Final border length: 4278866
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8621;  load averages:  1.12,  1.06,  1.05    23:07:35
+68 processes:  67 sleeping, 1 on cpu
+
+EC2-S-336x336-112488-25-74_seq_plembed PIVOTPART8+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART8+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 667.8222943108289
+Elapsed time (placement): 215.0073381 sec
+Conflict index before optimization: 494.5773903185005
+Elapsed time (optimization): 1532.1126391 sec
+Final conflict index: 474.39988993358884
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8794;  load averages:  1.02,  1.04,  1.05    23:38:05
+68 processes:  67 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed GREEDY2K SEQREEMBED-BL-TOT
+Running GREEDY2K-BL placement algorithm...
+Border length before placement: 15926428
+Elapsed time (placement): 301.7642424 sec
+Border length before optimization: 9088234
+Elapsed time (optimization): 39.2377794 sec
+Final border length: 8977752
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  8827;  load averages:  1.05,  1.04,  1.05    23:43:55
+68 processes:  67 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed GREEDY2K SEQREEMBED-CI-TOT
+Running GREEDY2K-CI placement algorithm...
+Conflict index before placement: 732.5347777066112
+Elapsed time (placement): 976.0692747 sec
+Conflict index before optimization: 644.6893220335984
+Elapsed time (optimization): 4555.942823 sec
+Final conflict index: 578.1909797799342
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  9304;  load averages:  1.03,  1.04,  1.05    01:19:13
+68 processes:  67 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART2+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART2+GREEDY2K-BL placement algorithm...
+Border length before placement: 15926428
+Elapsed time (placement): 790.9768144 sec
+Border length before optimization: 9198466
+Elapsed time (optimization): 56.8134512 sec
+Final border length: 9016918
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid:  9439;  load averages:  1.04,  1.06,  1.06    01:33:35
+70 processes:  69 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART2+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART2+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 732.5347777066112
+Elapsed time (placement): 12462.8396489 sec
+Conflict index before optimization: 529.4152763646953
+Elapsed time (optimization): 3649.1612854 sec
+Final conflict index: 508.98593807142436
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 10774;  load averages:  1.02,  1.03,  1.04    06:05:14
+68 processes:  67 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART4+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART4+GREEDY2K-BL placement algorithm...
+Border length before placement: 15926428
+Elapsed time (placement): 473.2075086 sec
+Border length before optimization: 9316732
+Elapsed time (optimization): 57.0375323 sec
+Final border length: 9121370
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 10827;  load averages:  1.08,  1.06,  1.05    06:14:13
+68 processes:  67 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART4+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART4+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 732.5347777066112
+Elapsed time (placement): 3967.9614525 sec
+Conflict index before optimization: 487.911692392824
+Elapsed time (optimization): 2745.2061572 sec
+Final conflict index: 471.25507992114836
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 11399;  load averages:  0.99,  1.02,  1.04    08:09:12
+68 processes:  67 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART6+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART6+GREEDY2K-BL placement algorithm...
+Border length before placement: 15926428
+Elapsed time (placement): 388.5592198 sec
+Border length before optimization: 9497756
+Elapsed time (optimization): 57.5144406 sec
+Final border length: 9274406
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 11442;  load averages:  1.05,  1.06,  1.05    08:16:48
+69 processes:  68 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART6+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART6+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 732.5347777066112
+Elapsed time (placement): 1744.667293 sec
+Conflict index before optimization: 465.24948030983944
+Elapsed time (optimization): 3624.4601154 sec
+Final conflict index: 449.2781499723676
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 11909;  load averages:  1.03,  1.04,  1.05    09:49:23
+68 processes:  67 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART8+GREEDY2K SEQREEMBED-BL-TOT
+Running PIVOTPART8+GREEDY2K-BL placement algorithm...
+Border length before placement: 15926428
+Elapsed time (placement): 274.3353027 sec
+Border length before optimization: 9864786
+Elapsed time (optimization): 57.1675707 sec
+Final border length: 9576496
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 11933;  load averages:  1.05,  1.05,  1.05    09:55:04
+68 processes:  67 sleeping, 1 on cpu
+
+POR-S-516x516-265635-25-74_seq_plembed PIVOTPART8+GREEDY2K SEQREEMBED-CI-TOT
+Running PIVOTPART8+GREEDY2K-CI placement algorithm...
+Conflict index before placement: 732.5347777066112
+Elapsed time (placement): 873.226518 sec
+Conflict index before optimization: 464.06150240073424
+Elapsed time (optimization): 3636.1118105 sec
+Final conflict index: 447.41959473396355
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 12336;  load averages:  1.04,  1.04,  1.05    11:13:20
+68 processes:  67 sleeping, 1 on cpu
+
+WH-S-822x822-674353-25-74_seq_plembed GREEDY2K SEQREEMBED-BL-TOT
+Running GREEDY2K-BL placement algorithm...
+Border length before placement: 40276788
+Elapsed time (placement): 787.7478951 sec
+Border length before optimization: 22648532
+Elapsed time (optimization): 100.5023823 sec
+Final border length: 22368016
+New layout is not equal to the original specification.
+New layout is compatible with the original specification.
+---------------------------
+last pid: 12428;  load averages:  1.07,  1.07,  1.06    11:28:34
+68 processes:  67 sleeping, 1 on cpu
+
+WH-S-822x822-674353-25-74_seq_plembed GREEDY2K SEQREEMBED-CI-TOT
+Running GREEDY2K-CI placement algorithm...
+Conflict index before placement: 738.8783412658238
